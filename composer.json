@@ -1,0 +1,29 @@
+{
+    "name": "lctrs/dbal-specification",
+    "description": "Specification pattern for DBAL repositories",
+    "type": "library",
+    "require": {
+        "php": "^7.1",
+        "doctrine/dbal": "^2.6"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "^4.3",
+        "phpspec/prophecy": "^1.7",
+        "phpstan/phpstan": "^0.9.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Lctrs\\DBALSpecification\\": "src/"
+        }
+    },
+    "scripts": {
+        "phpstan": "vendor/bin/phpstan analyse src --level=2"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jérôme Parmentier",
+            "email": "jerome@prmntr.me"
+        }
+    ]
+}
