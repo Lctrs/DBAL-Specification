@@ -1,16 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Lctrs\DBALSpecification\Filter;
 
 use Doctrine\DBAL\Query\QueryBuilder;
 use Lctrs\DBALSpecification\Filter;
+use function sprintf;
 
-/**
- * @author Jérôme Parmentier <jerome@prmntr.me>
- */
 final class IsNull implements Filter
 {
+    /** @var string */
     private $field;
+    /** @var string|null */
     private $alias;
 
     public function __construct(string $field, ?string $alias = null)
@@ -19,9 +21,9 @@ final class IsNull implements Filter
         $this->alias = $alias;
     }
 
-    public function getFilter(QueryBuilder $queryBuilder, ?string $alias = null): ?string
+    public function getFilter(QueryBuilder $queryBuilder, ?string $alias = null) : ?string
     {
-        if (null !== $this->alias) {
+        if ($this->alias !== null) {
             $alias = $this->alias;
         }
 

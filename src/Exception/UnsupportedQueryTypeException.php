@@ -1,10 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Lctrs\DBALSpecification\Exception;
 
-/**
- * @author Jérôme Parmentier <jerome@prmntr.me>
- */
+use function sprintf;
+
 class UnsupportedQueryTypeException extends InvalidArgumentException
 {
     public function __construct()

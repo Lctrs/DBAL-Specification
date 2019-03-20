@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Lctrs\DBALSpecification\Query;
 
 use Doctrine\DBAL\Query\QueryBuilder;
@@ -7,6 +9,7 @@ use Lctrs\DBALSpecification\QueryModifier;
 
 final class Offset implements QueryModifier
 {
+    /** @var int */
     private $offset;
 
     public function __construct(int $offset)
@@ -14,7 +17,7 @@ final class Offset implements QueryModifier
         $this->offset = $offset;
     }
 
-    public function modify(QueryBuilder $queryBuilder, ?string $alias = null): void
+    public function modify(QueryBuilder $queryBuilder, ?string $alias = null) : void
     {
         $queryBuilder->setFirstResult($this->offset);
     }

@@ -1,10 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Lctrs\DBALSpecification;
 
-/**
- * @author Jérôme Parmentier <jerome@prmntr.me>
- */
 interface Specification extends Filter, QueryModifier
 {
 }

@@ -1,15 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Lctrs\DBALSpecification\Query;
 
 use Doctrine\DBAL\Query\QueryBuilder;
 use Lctrs\DBALSpecification\QueryModifier;
 
-/**
- * @author Jérôme Parmentier <jerome@prmntr.me>
- */
 final class Limit implements QueryModifier
 {
+    /** @var int */
     private $limit;
 
     public function __construct(int $limit)
@@ -17,7 +17,7 @@ final class Limit implements QueryModifier
         $this->limit = $limit;
     }
 
-    public function modify(QueryBuilder $queryBuilder, ?string $alias = null): void
+    public function modify(QueryBuilder $queryBuilder, ?string $alias = null) : void
     {
         $queryBuilder->setMaxResults($this->limit);
     }

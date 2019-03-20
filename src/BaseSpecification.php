@@ -1,14 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Lctrs\DBALSpecification;
 
 use Doctrine\DBAL\Query\QueryBuilder;
 
-/**
- * @author Jérôme Parmentier <jerome@prmntr.me>
- */
 abstract class BaseSpecification implements Specification
 {
+    /** @var string|null */
     private $alias;
 
     public function __construct(?string $alias = null)
@@ -16,31 +16,31 @@ abstract class BaseSpecification implements Specification
         $this->alias = $alias;
     }
 
-    final public function getFilter(QueryBuilder $queryBuilder, ?string $alias = null): ?string
+    final public function getFilter(QueryBuilder $queryBuilder, ?string $alias = null) : ?string
     {
         $spec = $this->getSpec();
-        if (!$spec instanceof Filter) {
+        if (! $spec instanceof Filter) {
             return null;
         }
 
         return $spec->getFilter($queryBuilder, $this->getAlias($alias));
     }
 
-    final public function modify(QueryBuilder $queryBuilder, ?string $alias = null): void
+    final public function modify(QueryBuilder $queryBuilder, ?string $alias = null) : void
     {
         $spec = $this->getSpec();
-        if (!$spec instanceof QueryModifier) {
+        if (! $spec instanceof QueryModifier) {
             return;
         }
 
         $spec->modify($queryBuilder, $this->getAlias($alias));
     }
 
-    abstract protected function getSpec(): Specification;
+    abstract protected function getSpec() : Specification;
 
-    private function getAlias(?string $alias = null): ?string
+    private function getAlias(?string $alias = null) : ?string
     {
-        if (null !== $this->alias) {
+        if ($this->alias !== null) {
             return $this->alias;
         }
 

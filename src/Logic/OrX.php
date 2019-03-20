@@ -1,18 +1,26 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Lctrs\DBALSpecification\Logic;
 
-/**
- * @author Jérôme Parmentier <jerome@prmntr.me>
- */
+use Lctrs\DBALSpecification\Filter;
+use Lctrs\DBALSpecification\QueryModifier;
+
 final class OrX extends LogicX
 {
+    /**
+     * @param Filter[]|QueryModifier[] ...$children
+     */
     public function __construct(...$children)
     {
         parent::__construct(self::ORX, $children);
     }
 
-    public function orX($child)
+    /**
+     * @param Filter|QueryModifier $child
+     */
+    public function orX($child) : void
     {
         $this->append($child);
     }

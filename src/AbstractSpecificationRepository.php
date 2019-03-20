@@ -1,38 +1,50 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Lctrs\DBALSpecification;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Driver\Statement;
 use Doctrine\DBAL\Query\QueryBuilder;
+use InvalidArgumentException;
 use Lctrs\DBALSpecification\Exception\UnsupportedQueryTypeException;
+use function get_class;
+use function gettype;
+use function is_object;
+use function sprintf;
 
-/**
- * @author Jérôme Parmentier <jerome@prmntr.me>
- */
 abstract class AbstractSpecificationRepository
 {
+    /** @var Connection */
     protected $connection;
+    /** @var string|null */
     protected $alias;
 
     public function __construct(Connection $connection, ?string $alias = null)
     {
         $this->connection = $connection;
-        $this->alias = $alias;
+        $this->alias      = $alias;
     }
 
-    public function match($specification): Statement
+    /**
+     * @param Filter|QueryModifier $specification
+     */
+    public function match($specification) : Statement
     {
         $qb = $this->getQuery($specification);
 
-        if (QueryBuilder::SELECT !== $qb->getType()) {
+        if ($qb->getType() !== QueryBuilder::SELECT) {
             throw new UnsupportedQueryTypeException();
         }
 
         return $qb->execute();
     }
 
-    protected function getQuery($specification): QueryBuilder
+    /**
+     * @param Filter|QueryModifier $specification
+     */
+    protected function getQuery($specification) : QueryBuilder
     {
         $qb = $this->connection->createQueryBuilder();
         $this->applySpecification($qb, $specification, $this->alias);
@@ -40,27 +52,27 @@ abstract class AbstractSpecificationRepository
         return $qb;
     }
 
-    protected function applySpecification(QueryBuilder $queryBuilder, $specification = null, ?string $alias = null): void
-    {
-        if (null === $specification) {
+    /**
+     * @param Filter|QueryModifier|null $specification
+     */
+    protected function applySpecification(
+        QueryBuilder $queryBuilder,
+        $specification = null,
+        ?string $alias = null
+    ) : void {
+        if ($specification === null) {
             return;
-        }
-
-        if (!$specification instanceof QueryModifier && !$specification instanceof Filter) {
-            throw new \InvalidArgumentException(sprintf(
-                'Expected argument of type "%s" or "%s", "%s" given.',
-                QueryModifier::class,
-                Filter::class,
-                is_object($specification) ? get_class($specification) : gettype($specification)
-            ));
         }
 
         if ($specification instanceof QueryModifier) {
             $specification->modify($queryBuilder, $alias);
         }
 
-        if ($specification instanceof Filter && $filter = $specification->getFilter($queryBuilder, $alias)) {
-            $queryBuilder->andWhere($filter);
+        $filter = $specification->getFilter($queryBuilder, $alias);
+        if (! ($specification instanceof Filter) || ! $filter) {
+            return;
         }
+
+        $queryBuilder->andWhere($filter);
     }
 }

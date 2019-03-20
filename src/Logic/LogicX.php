@@ -1,59 +1,69 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Lctrs\DBALSpecification\Logic;
 
 use Doctrine\DBAL\Query\QueryBuilder;
 use Lctrs\DBALSpecification\Filter;
 use Lctrs\DBALSpecification\QueryModifier;
 use Lctrs\DBALSpecification\Specification;
+use function array_filter;
+use function array_map;
+use function call_user_func_array;
 
-/**
- * @author Jérôme Parmentier <jerome@prmntr.me>
- */
 class LogicX implements Specification
 {
     public const ANDX = 'andX';
-    public const ORX = 'orX';
+    public const ORX  = 'orX';
 
-    /**
-     * @var Filter[]|QueryModifier[]
-     */
+    /** @var Filter[]|QueryModifier[] */
     private $children;
+    /** @var string */
     private $expression;
 
+    /**
+     * @param Filter[]|QueryModifier[] $children
+     */
     public function __construct(string $expression, array $children = [])
     {
         $this->expression = $expression;
-        $this->children = $children;
+        $this->children   = $children;
     }
 
-    public function getFilter(QueryBuilder $queryBuilder, ?string $alias = null): ?string
+    public function getFilter(QueryBuilder $queryBuilder, ?string $alias = null) : ?string
     {
-        return (string) \call_user_func_array(
+        return (string) call_user_func_array(
             [$queryBuilder->expr(), $this->expression],
             array_map(
-                function ($spec) use ($queryBuilder, $alias) {
-                    if (!$spec instanceof Filter) {
-                        return;
-                    }
-
-                    return $spec->getFilter($queryBuilder, $alias);
+                static function (Filter $filter) use ($queryBuilder, $alias) : ?string {
+                    return $filter->getFilter($queryBuilder, $alias);
                 },
-                $this->children
+                array_filter(
+                    $this->children,
+                    static function ($spec) : bool {
+                        return $spec instanceof Filter;
+                    }
+                )
             )
         );
     }
 
-    public function modify(QueryBuilder $queryBuilder, ?string $alias = null): void
+    public function modify(QueryBuilder $queryBuilder, ?string $alias = null) : void
     {
         foreach ($this->children as $child) {
-            if ($child instanceof QueryModifier) {
-                $child->modify($queryBuilder, $alias);
+            if (! ($child instanceof QueryModifier)) {
+                continue;
             }
+
+            $child->modify($queryBuilder, $alias);
         }
     }
 
-    protected function append($child)
+    /**
+     * @param Filter|QueryModifier $child
+     */
+    protected function append($child) : void
     {
         $this->children[] = $child;
     }

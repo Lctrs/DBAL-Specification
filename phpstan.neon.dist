@@ -1,4 +1,4 @@
 parameters:
     paths:
         - %currentWorkingDirectory%/src/
-    level: 2
+    level: 5
