@@ -17,4 +17,4 @@ install:
 
 script:
   - vendor/bin/phpspec run --format=dot
-  - composer phpstan
+  - vendor/bin/phpstan analyse
