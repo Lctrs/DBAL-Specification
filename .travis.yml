@@ -4,17 +4,47 @@ cache:
   directories:
     - $HOME/.composer/cache/files
 
-matrix:
-  include:
-    - php: '7.1'
-    - php: '7.2'
-    - php: '7.2'
-      env: deps='low'
-
 install:
-  - if [[ ! $deps ]]; then composer update --prefer-dist --no-progress --no-suggest --ansi; fi
-  - if [[ $deps = 'low' ]]; then composer update --prefer-dist --no-progress --no-suggest --prefer-stable --prefer-lowest --ansi; fi
+  - travis_retry composer update --prefer-dist --no-progress --no-suggest --ansi $DEPENDENCIES
 
-script:
-  - vendor/bin/phpspec run --format=dot
-  - vendor/bin/phpstan analyse
+jobs:
+  include:
+    - stage: Test
+      php: 7.1
+      env: DEPENDENCIES=""
+      script: vendor/bin/phpspec run --format=dot
+
+    - stage: Test
+      php: 7.1
+      env: DEPENDENCIES="--prefer-lowest --prefer-stable"
+      script: vendor/bin/phpspec run --format=dot
+
+    - stage: Test
+      php: 7.2
+      env: DEPENDENCIES=""
+      script: vendor/bin/phpspec run --format=dot
+
+    - stage: Test
+      php: 7.2
+      env: DEPENDENCIES="--prefer-lowest --prefer-stable"
+      script: vendor/bin/phpspec run --format=dot
+
+    - stage: Test
+      php: 7.3
+      env: DEPENDENCIES=""
+      script: vendor/bin/phpspec run --format=dot
+
+    - stage: Test
+      php: 7.3
+      env: DEPENDENCIES="--prefer-lowest --prefer-stable"
+      script: vendor/bin/phpspec run --format=dot
+
+    - stage: Check Coding Standard
+      php: 7.3
+      env: DEPENDENCIES=""
+      script: vendor/bin/phpcs
+
+    - stage: Static Analysis
+      php: 7.1
+      env: DEPENDENCIES=""
+      script: vendor/bin/phpstan analyse
