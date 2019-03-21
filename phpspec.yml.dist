@@ -1,0 +1,4 @@
+suites:
+    dbalspecification_suite:
+        namespace: Lctrs\DBALSpecification
+        psr4_prefix: Lctrs\DBALSpecification

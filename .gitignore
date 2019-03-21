@@ -1,4 +1,5 @@
 /vendor/
-/.php_cs
 /composer.lock
+/phpcs.xml
 /phpspec.yml
+/phpstan.neon
