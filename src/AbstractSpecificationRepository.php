@@ -7,12 +7,7 @@ namespace Lctrs\DBALSpecification;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Driver\Statement;
 use Doctrine\DBAL\Query\QueryBuilder;
-use InvalidArgumentException;
 use Lctrs\DBALSpecification\Exception\UnsupportedQueryTypeException;
-use function get_class;
-use function gettype;
-use function is_object;
-use function sprintf;
 
 abstract class AbstractSpecificationRepository
 {
