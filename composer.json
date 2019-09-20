@@ -4,7 +4,7 @@
     "type": "library",
     "require": {
         "php": "^7.1",
-        "doctrine/dbal": "^2.6"
+        "doctrine/dbal": "^2.9"
     },
     "require-dev": {
         "doctrine/coding-standard": "^6.0",
