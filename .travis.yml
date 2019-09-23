@@ -42,7 +42,9 @@ jobs:
     - stage: Check Coding Standard
       php: 7.3
       env: DEPENDENCIES=""
-      script: vendor/bin/phpcs
+      script:
+        - composer normalize --dry-run
+        - vendor/bin/phpcs
 
     - stage: Static Analysis
       php: 7.1
