@@ -44,7 +44,7 @@ class Comparison implements Filter
 
     public function __construct(string $operator, string $field, string $value, ?string $alias = null)
     {
-        if (! in_array($operator, self::$operators)) {
+        if (! in_array($operator, self::$operators, true)) {
             throw new InvalidArgumentException(sprintf(
                 '"%s" is not a valid comparison operator. Valid operators are: "%s"',
                 $operator,

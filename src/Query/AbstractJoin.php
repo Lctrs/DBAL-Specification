@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Lctrs\DBALSpecification\Query;
 
 use Doctrine\DBAL\Query\QueryBuilder;
+use Lctrs\DBALSpecification\Exception\MissingRequiredAlias;
 use Lctrs\DBALSpecification\Filter;
 use Lctrs\DBALSpecification\QueryModifier;
 
@@ -31,6 +32,10 @@ abstract class AbstractJoin implements QueryModifier
     {
         if ($this->fromAlias !== null) {
             $alias = $this->fromAlias;
+        }
+
+        if ($alias === null) {
+            throw MissingRequiredAlias::fromJoin();
         }
 
         $this->doJoin($queryBuilder, $alias);
