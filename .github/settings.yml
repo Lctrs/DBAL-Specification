@@ -10,7 +10,17 @@ branches:
               required_approving_review_count: 1
           required_status_checks:
               contexts:
-                  - "continuous-integration/travis-ci/pr"
+                  - "Coding Standards"
+                  - "Static Code Analysis"
+                  - "Tests (php7.1, lowest)"
+                  - "Tests (php7.1, locked)"
+                  - "Tests (php7.1, highest)"
+                  - "Tests (php7.2, lowest)"
+                  - "Tests (php7.2, locked)"
+                  - "Tests (php7.2, highest)"
+                  - "Tests (php7.3, lowest)"
+                  - "Tests (php7.3, locked)"
+                  - "Tests (php7.3, highest)"
               strict: false
           restrictions: null
 

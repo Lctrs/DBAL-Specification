@@ -1,0 +1,80 @@
+# https://help.github.com/en/categories/automating-your-workflow-with-github-actions
+
+on:
+    - pull_request
+    - push
+
+name: "Continuous Integration"
+
+jobs:
+    coding-standards:
+        name: "Coding Standards"
+        
+        runs-on: ubuntu-latest
+        
+        steps:
+            - name: "Checkout"
+              uses: actions/checkout@master
+            
+            - name: "Validate composer.json and composer.lock"
+              run: php7.1 $(which composer) validate --strict
+            
+            - name: "Install locked dependencies with composer"
+              run: php7.1 $(which composer) install --no-interaction --no-progress --no-suggest
+            
+            - name: "Run localheinz/composer-normalize"
+              run: php7.1 $(which composer) normalize --dry-run
+            
+            - name: "Run doctrine/coding-standard"
+              run: php7.1 vendor/bin/phpcs
+    
+    static-code-analysis:
+        name: "Static Code Analysis"
+        
+        runs-on: ubuntu-latest
+        
+        steps:
+            - name: "Checkout"
+              uses: actions/checkout@master
+            
+            - name: "Install locked dependencies with composer"
+              run: php7.3 $(which composer) install --no-interaction --no-progress --no-suggest
+            
+            - name: "Run phpstan/phpstan"
+              run: php7.3 vendor/bin/phpstan analyse
+    
+    tests:
+        name: "Tests"
+        
+        runs-on: ubuntu-latest
+        
+        strategy:
+            matrix:
+                php-binary:
+                    - php7.1
+                    - php7.2
+                    - php7.3
+                
+                dependencies:
+                    - lowest
+                    - locked
+                    - highest
+
+        steps:
+            - name: "Checkout"
+              uses: actions/checkout@master
+
+            - name: "Install lowest dependencies with composer"
+              if: matrix.dependencies == 'lowest'
+              run: ${{ matrix.php-binary }} $(which composer) update --no-interaction --no-progress --no-suggest --prefer-lowest --prefer-stable
+
+            - name: "Install locked dependencies with composer"
+              if: matrix.dependencies == 'locked'
+              run: ${{ matrix.php-binary }} $(which composer) install --no-interaction --no-progress --no-suggest
+
+            - name: "Install highest dependencies with composer"
+              if: matrix.dependencies == 'highest'
+              run: ${{ matrix.php-binary }} $(which composer) update --no-interaction --no-progress --no-suggest
+
+            - name: "Run unit tests with phpspec/phpspec"
+              run: ${{ matrix.php-binary }} vendor/bin/phpspec run --format=dot
