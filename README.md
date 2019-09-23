@@ -1,5 +1,5 @@
 # DBAL Specification
-[![Build Status](https://travis-ci.org/Lctrs/DBAL-Specification.svg?branch=master)](https://travis-ci.org/Lctrs/DBAL-Specification)
+[![CI Status](https://github.com/Lctrs/DBAL-Specification/workflows/Continuous%20Integration/badge.svg)](https://github.com/Lctrs/DBAL-Specification/actions)
 
 [Specification pattern](http://en.wikipedia.org/wiki/Specification_pattern) for Doctrine DBAL 2.6+ compatible with PHP 7.1+.
 
