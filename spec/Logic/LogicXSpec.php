@@ -48,7 +48,7 @@ class LogicXSpec extends ObjectBehavior
         $specificationB->getFilter($qb, $alias)->willReturn($y);
         $qb->expr()->willReturn($expression);
 
-        $expression->{self::EXPRESSION}($x, $y)->shouldBeCalled();
+        $expression->{self::EXPRESSION}([$x, $y])->shouldBeCalled();
 
         $this->getFilter($qb, $alias);
     }
@@ -65,7 +65,7 @@ class LogicXSpec extends ObjectBehavior
         $exprB->getFilter($qb, $alias)->willReturn($y);
         $qb->expr()->willReturn($expression);
 
-        $expression->{self::EXPRESSION}($x, $y)->shouldBeCalled();
+        $expression->{self::EXPRESSION}([$x, $y])->shouldBeCalled();
 
         $this->getFilter($qb, $alias);
     }

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Lctrs\DBALSpecification;
 
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Driver\Statement;
+use Doctrine\DBAL\Driver\ResultStatement;
 use Doctrine\DBAL\Query\QueryBuilder;
 use Lctrs\DBALSpecification\Exception\UnsupportedQueryTypeException;
 
@@ -25,7 +25,7 @@ abstract class AbstractSpecificationRepository
     /**
      * @param Filter|QueryModifier $specification
      */
-    public function match($specification) : Statement
+    public function match($specification) : ResultStatement
     {
         $qb = $this->getQuery($specification);
 
@@ -33,7 +33,11 @@ abstract class AbstractSpecificationRepository
             throw new UnsupportedQueryTypeException();
         }
 
-        return $qb->execute();
+        return $qb->getConnection()->executeQuery(
+            $qb->getSQL(),
+            $qb->getParameters(),
+            $qb->getParameterTypes()
+        );
     }
 
     /**
@@ -63,8 +67,13 @@ abstract class AbstractSpecificationRepository
             $specification->modify($queryBuilder, $alias);
         }
 
+        if (! $specification instanceof Filter) {
+            return;
+        }
+
         $filter = $specification->getFilter($queryBuilder, $alias);
-        if (! ($specification instanceof Filter) || ! $filter) {
+
+        if ($filter === null) {
             return;
         }
 

@@ -36,7 +36,10 @@ abstract class BaseSpecification implements Specification
         $spec->modify($queryBuilder, $this->getAlias($alias));
     }
 
-    abstract protected function getSpec() : Specification;
+    /**
+     * @return Filter|QueryModifier
+     */
+    abstract protected function getSpec();
 
     private function getAlias(?string $alias = null) : ?string
     {
