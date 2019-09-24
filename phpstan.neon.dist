@@ -8,3 +8,4 @@ parameters:
     inferPrivatePropertyTypeFromConstructor: true
     paths:
         - src
+    tmpDir: %currentWorkingDirectory%/.build/phpstan
