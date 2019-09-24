@@ -1,0 +1,7 @@
+/.dependabot/       export-ignore
+/.github/           export-ignore
+/spec/              export-ignore
+/.gitattributes     export-ignore
+/.gitignore         export-ignore
+/phpspec.yml.dist   export-ignore
+/phpstan.neon.dist  export-ignore
