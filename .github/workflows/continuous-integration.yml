@@ -84,6 +84,30 @@ jobs:
             - name: "Run unit tests with phpspec/phpspec"
               run: ${{ matrix.php-binary }} vendor/bin/phpspec run --format=dot
 
+    code-coverage:
+        name: "Code Coverage"
+    
+        runs-on: ubuntu-latest
+    
+        steps:
+            - name: "Checkout"
+              uses: actions/checkout@master
+        
+            - name: "Install locked dependencies with composer"
+              run: php7.3 $(which composer) install --no-interaction --no-progress --no-suggest
+        
+            - name: "Dump Xdebug filter with phpunit/phpunit"
+              run: php7.3 vendor/bin/phpunit --configuration=test/Unit/phpunit.xml.dist --dump-xdebug-filter=.build/phpunit/xdebug-filter.php
+        
+            - name: "Collect code coverage with Xdebug and phpunit/phpunit"
+              run: php7.3 vendor/bin/phpunit --configuration=test/Unit/phpunit.xml.dist --coverage-clover=build/logs/clover.xml --prepend=.build/phpunit/xdebug-filter.php
+        
+            - name: "Download code coverage uploader for Codecov.io"
+              run: curl -s https://codecov.io/bash -o codecov
+        
+            - name: "Send code coverage report to Codecov.io"
+              run: bash codecov -t ${{ secrets.CODECOV_TOKEN }}
+
     mutation-tests:
         name: "Mutation Tests"
 
