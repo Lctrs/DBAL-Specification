@@ -1,8 +1,8 @@
 # DBAL Specification
 [![CI Status](https://github.com/Lctrs/DBAL-Specification/workflows/Continuous%20Integration/badge.svg)](https://github.com/Lctrs/DBAL-Specification/actions)
-[![codecov](https://codecov.io/gh/Lctrs/DBAL-Specification/branch/master/graph/badge.svg)](https://codecov.io/gh/Lctrs/DBAL-Specification)
-[![Latest Stable Version](https://poser.pugx.org/Lctrs/DBAL-Specification/v/stable)](https://packagist.org/packages/Lctrs/DBAL-Specification)
-[![Total Downloads](https://poser.pugx.org/Lctrs/DBAL-Specification/downloads)](https://packagist.org/packages/Lctrs/DBAL-Specification)
+[![codecov](https://img.shields.io/codecov/c/github/Lctrs/DBAL-Specification?style=flat-square)](https://codecov.io/gh/Lctrs/DBAL-Specification)
+[![Latest Stable Version](https://img.shields.io/packagist/v/Lctrs/DBAL-Specification?style=flat-square)](https://packagist.org/packages/Lctrs/DBAL-Specification)
+[![Total Downloads](https://img.shields.io/packagist/dt/Lctrs/DBAL-Specification?style=flat-square)](https://packagist.org/packages/Lctrs/DBAL-Specification)
 
 [Specification pattern](http://en.wikipedia.org/wiki/Specification_pattern) for Doctrine DBAL 2.9+ compatible with PHP 7.2+.
 
