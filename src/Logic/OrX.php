@@ -4,24 +4,15 @@ declare(strict_types=1);
 
 namespace Lctrs\DBALSpecification\Logic;
 
-use Lctrs\DBALSpecification\Filter;
-use Lctrs\DBALSpecification\QueryModifier;
+use Doctrine\DBAL\Query\Expression\ExpressionBuilder;
 
 final class OrX extends LogicX
 {
     /**
-     * @param Filter[]|QueryModifier[] ...$children
+     * @inheritDoc
      */
-    public function __construct(...$children)
+    protected function doGetFilters(ExpressionBuilder $expressionBuilder, array $filters) : ?string
     {
-        parent::__construct(self::ORX, $children);
-    }
-
-    /**
-     * @param Filter|QueryModifier $child
-     */
-    public function orX($child) : void
-    {
-        $this->append($child);
+        return (string) $expressionBuilder->orX(...$filters);
     }
 }

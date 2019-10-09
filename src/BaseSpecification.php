@@ -8,45 +8,28 @@ use Doctrine\DBAL\Query\QueryBuilder;
 
 abstract class BaseSpecification implements Specification
 {
-    /** @var string|null */
-    private $alias;
-
-    public function __construct(?string $alias = null)
-    {
-        $this->alias = $alias;
-    }
-
-    final public function getFilter(QueryBuilder $queryBuilder, ?string $alias = null) : ?string
+    final public function getFilter(QueryBuilder $queryBuilder) : ?string
     {
         $spec = $this->getSpec();
         if (! $spec instanceof Filter) {
             return null;
         }
 
-        return $spec->getFilter($queryBuilder, $this->getAlias($alias));
+        return $spec->getFilter($queryBuilder);
     }
 
-    final public function modify(QueryBuilder $queryBuilder, ?string $alias = null) : void
+    final public function modify(QueryBuilder $queryBuilder) : void
     {
         $spec = $this->getSpec();
         if (! $spec instanceof QueryModifier) {
             return;
         }
 
-        $spec->modify($queryBuilder, $this->getAlias($alias));
+        $spec->modify($queryBuilder);
     }
 
     /**
      * @return Filter|QueryModifier
      */
     abstract protected function getSpec();
-
-    private function getAlias(?string $alias = null) : ?string
-    {
-        if ($this->alias !== null) {
-            return $this->alias;
-        }
-
-        return $alias;
-    }
 }

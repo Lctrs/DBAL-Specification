@@ -4,29 +4,38 @@ declare(strict_types=1);
 
 namespace Lctrs\DBALSpecification\Test\Unit\Query;
 
+use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Query\QueryBuilder;
 use Lctrs\DBALSpecification\Query\Select;
 use PHPUnit\Framework\TestCase;
 
-class SelectTest extends TestCase
+final class SelectTest extends TestCase
 {
-    public function testItCallsSelect() : void
-    {
-        $queryBuilder = $this->createMock(QueryBuilder::class);
-        $queryBuilder->expects(self::once())
-            ->method('addSelect')
-            ->with('f.foo');
+    /** @var QueryBuilder */
+    protected $queryBuilder;
 
-        (new Select('foo', 'f'))->modify($queryBuilder);
+    protected function setUp() : void
+    {
+        $this->queryBuilder = new QueryBuilder($this->createMock(Connection::class));
+    }
+
+    public function testItAddsSelect() : void
+    {
+        (new Select('foo'))->modify($this->queryBuilder);
+
+        self::assertSame(
+            ['foo'],
+            $this->queryBuilder->getQueryPart('select')
+        );
     }
 
     public function testItUsesAlias() : void
     {
-        $queryBuilder = $this->createMock(QueryBuilder::class);
-        $queryBuilder->expects(self::once())
-            ->method('addSelect')
-            ->with('x.foo');
+        (new Select('x.foo'))->modify($this->queryBuilder);
 
-        (new Select('foo'))->modify($queryBuilder, 'x');
+        self::assertSame(
+            ['x.foo'],
+            $this->queryBuilder->getQueryPart('select')
+        );
     }
 }

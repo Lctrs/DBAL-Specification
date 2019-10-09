@@ -18,8 +18,8 @@ final class Having implements QueryModifier
         $this->filter = $filter;
     }
 
-    public function modify(QueryBuilder $queryBuilder, ?string $alias = null) : void
+    public function modify(QueryBuilder $queryBuilder) : void
     {
-        $queryBuilder->having($this->filter->getFilter($queryBuilder, $alias));
+        $queryBuilder->having($this->filter->getFilter($queryBuilder));
     }
 }

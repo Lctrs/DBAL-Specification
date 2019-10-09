@@ -8,5 +8,5 @@ use Doctrine\DBAL\Query\QueryBuilder;
 
 interface QueryModifier
 {
-    public function modify(QueryBuilder $queryBuilder, ?string $alias = null) : void;
+    public function modify(QueryBuilder $queryBuilder) : void;
 }

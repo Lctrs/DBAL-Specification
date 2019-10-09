@@ -6,10 +6,15 @@ namespace Lctrs\DBALSpecification\Query;
 
 use Doctrine\DBAL\Query\QueryBuilder;
 
-final class InnerJoin extends AbstractJoin
+final class InnerJoin extends Join
 {
-    protected function doJoin(QueryBuilder $queryBuilder, string $alias) : void
+    protected function doJoin(QueryBuilder $queryBuilder) : void
     {
-        $queryBuilder->innerJoin($alias, $this->join, $this->alias, $this->condition->getFilter($queryBuilder, $alias));
+        $queryBuilder->innerJoin(
+            $this->fromAlias,
+            $this->join,
+            $this->alias,
+            $this->condition->getFilter($queryBuilder)
+        );
     }
 }

@@ -7,19 +7,16 @@ namespace Lctrs\DBALSpecification;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Driver\ResultStatement;
 use Doctrine\DBAL\Query\QueryBuilder;
-use Lctrs\DBALSpecification\Exception\UnsupportedQueryTypeException;
+use Lctrs\DBALSpecification\Exception\UnsupportedQueryType;
 
-abstract class AbstractSpecificationRepository
+abstract class SpecificationRepository
 {
     /** @var Connection */
     protected $connection;
-    /** @var string|null */
-    protected $alias;
 
-    public function __construct(Connection $connection, ?string $alias = null)
+    public function __construct(Connection $connection)
     {
         $this->connection = $connection;
-        $this->alias      = $alias;
     }
 
     /**
@@ -30,10 +27,10 @@ abstract class AbstractSpecificationRepository
         $qb = $this->getQuery($specification);
 
         if ($qb->getType() !== QueryBuilder::SELECT) {
-            throw new UnsupportedQueryTypeException();
+            throw new UnsupportedQueryType();
         }
 
-        return $qb->getConnection()->executeQuery(
+        return $this->connection->executeQuery(
             $qb->getSQL(),
             $qb->getParameters(),
             $qb->getParameterTypes()
@@ -43,35 +40,30 @@ abstract class AbstractSpecificationRepository
     /**
      * @param Filter|QueryModifier $specification
      */
-    protected function getQuery($specification) : QueryBuilder
+    private function getQuery($specification) : QueryBuilder
     {
         $qb = $this->connection->createQueryBuilder();
-        $this->applySpecification($qb, $specification, $this->alias);
+        $this->applySpecification($qb, $specification);
 
         return $qb;
     }
 
     /**
-     * @param Filter|QueryModifier|null $specification
+     * @param Filter|QueryModifier $specification
      */
-    protected function applySpecification(
+    private function applySpecification(
         QueryBuilder $queryBuilder,
-        $specification = null,
-        ?string $alias = null
+        $specification = null
     ) : void {
-        if ($specification === null) {
-            return;
-        }
-
         if ($specification instanceof QueryModifier) {
-            $specification->modify($queryBuilder, $alias);
+            $specification->modify($queryBuilder);
         }
 
         if (! $specification instanceof Filter) {
             return;
         }
 
-        $filter = $specification->getFilter($queryBuilder, $alias);
+        $filter = $specification->getFilter($queryBuilder);
 
         if ($filter === null) {
             return;

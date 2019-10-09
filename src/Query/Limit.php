@@ -17,7 +17,7 @@ final class Limit implements QueryModifier
         $this->limit = $limit;
     }
 
-    public function modify(QueryBuilder $queryBuilder, ?string $alias = null) : void
+    public function modify(QueryBuilder $queryBuilder) : void
     {
         $queryBuilder->setMaxResults($this->limit);
     }

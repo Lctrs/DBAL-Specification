@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Lctrs\DBALSpecification\Filter;
 
+use Doctrine\DBAL\Query\QueryBuilder;
+
 final class Equals extends Comparison
 {
-    public function __construct(string $field, string $value, ?string $alias = null)
+    protected function doComparison(QueryBuilder $queryBuilder, string $x, string $y) : string
     {
-        parent::__construct(self::EQ, $field, $value, $alias);
+        return $queryBuilder->expr()->eq($x, $y);
     }
 }
