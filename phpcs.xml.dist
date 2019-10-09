@@ -3,12 +3,7 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="vendor/squizlabs/php_codesniffer/phpcs.xsd"
 >
-    <rule ref="Doctrine">
-        <exclude name="SlevomatCodingStandard.Classes.SuperfluousAbstractClassNaming"/>
-        <exclude name="SlevomatCodingStandard.Classes.SuperfluousExceptionNaming"/>
-        <exclude name="SlevomatCodingStandard.Classes.SuperfluousInterfaceNaming"/>
-        <exclude name="SlevomatCodingStandard.Classes.SuperfluousTraitNaming"/>
-    </rule>
+    <rule ref="Doctrine"/>
 
     <file>src/</file>
     <file>test/</file>

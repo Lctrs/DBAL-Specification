@@ -4,27 +4,39 @@ declare(strict_types=1);
 
 namespace Lctrs\DBALSpecification\Test\Unit\Query;
 
+use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Query\Expression\CompositeExpression;
+use Doctrine\DBAL\Query\Expression\ExpressionBuilder;
 use Doctrine\DBAL\Query\QueryBuilder;
 use Lctrs\DBALSpecification\Filter;
 use Lctrs\DBALSpecification\Query\Having;
 use PHPUnit\Framework\TestCase;
 
-class HavingTest extends TestCase
+final class HavingTest extends TestCase
 {
-    public function testItAddHaving() : void
+    /** @var QueryBuilder */
+    protected $queryBuilder;
+
+    protected function setUp() : void
     {
-        $queryBuilder = $this->createMock(QueryBuilder::class);
-        $queryBuilder->expects(self::once())
-            ->method('having')
-            ->with('a.foo = :bar');
+        $connection  = $this->createMock(Connection::class);
+        $exprBuilder = new ExpressionBuilder($connection);
 
-        $filter = $this->createMock(Filter::class);
-        $filter
-            ->expects(self::once())
-            ->method('getFilter')
-            ->with($queryBuilder, 'a')
-            ->willReturn('a.foo = :bar');
+        $connection
+            ->expects(self::any())
+            ->method('getExpressionBuilder')
+            ->willReturn($exprBuilder);
 
-        (new Having($filter))->modify($queryBuilder, 'a');
+        $this->queryBuilder = new QueryBuilder($connection);
+    }
+
+    public function testItAddsHaving() : void
+    {
+        (new Having(new Filter\IsNull('foo')))->modify($this->queryBuilder);
+
+        self::assertEquals(
+            new CompositeExpression('AND', ['foo IS NULL']),
+            $this->queryBuilder->getQueryPart('having')
+        );
     }
 }

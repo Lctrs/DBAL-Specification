@@ -17,7 +17,7 @@ final class Offset implements QueryModifier
         $this->offset = $offset;
     }
 
-    public function modify(QueryBuilder $queryBuilder, ?string $alias = null) : void
+    public function modify(QueryBuilder $queryBuilder) : void
     {
         $queryBuilder->setFirstResult($this->offset);
     }

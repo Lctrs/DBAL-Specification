@@ -20,12 +20,8 @@ final class From implements QueryModifier
         $this->alias = $alias;
     }
 
-    public function modify(QueryBuilder $queryBuilder, ?string $alias = null) : void
+    public function modify(QueryBuilder $queryBuilder) : void
     {
-        if ($this->alias !== null) {
-            $alias = $this->alias;
-        }
-
-        $queryBuilder->from($this->table, $alias);
+        $queryBuilder->from($this->table, $this->alias);
     }
 }

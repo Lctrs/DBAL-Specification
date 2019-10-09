@@ -6,7 +6,6 @@ namespace Lctrs\DBALSpecification\Query;
 
 use Doctrine\DBAL\Query\QueryBuilder;
 use Lctrs\DBALSpecification\QueryModifier;
-use function sprintf;
 
 final class OrderBy implements QueryModifier
 {
@@ -14,22 +13,15 @@ final class OrderBy implements QueryModifier
     private $field;
     /** @var string */
     private $order;
-    /** @var string|null */
-    private $alias;
 
-    public function __construct(string $field, string $order = 'ASC', ?string $alias = null)
+    public function __construct(string $field, string $order = 'ASC')
     {
         $this->field = $field;
         $this->order = $order;
-        $this->alias = $alias;
     }
 
-    public function modify(QueryBuilder $queryBuilder, ?string $alias = null) : void
+    public function modify(QueryBuilder $queryBuilder) : void
     {
-        if ($this->alias !== null) {
-            $alias = $this->alias;
-        }
-
-        $queryBuilder->addOrderBy(sprintf('%s.%s', $alias, $this->field), $this->order);
+        $queryBuilder->addOrderBy($this->field, $this->order);
     }
 }

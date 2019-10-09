@@ -4,22 +4,28 @@ declare(strict_types=1);
 
 namespace Lctrs\DBALSpecification\Filter;
 
-use function sprintf;
+use Doctrine\DBAL\Query\QueryBuilder;
+use Lctrs\DBALSpecification\Filter;
+use Lctrs\DBALSpecification\Operand\LikePattern;
 
-final class Like extends Comparison
+final class Like implements Filter
 {
-    public const CONTAINS    = '%%%s%%';
-    public const ENDS_WITH   = '%%%s';
-    public const STARTS_WITH = '%s%%';
+    /** @var string */
+    private $field;
+    /** @var LikePattern */
+    private $value;
 
-    public function __construct(string $field, string $value, string $format = self::CONTAINS, ?string $alias = null)
+    public function __construct(string $field, LikePattern $value)
     {
-        $formattedValue = $this->formatValue($format, $value);
-        parent::__construct(self::LIKE, $field, $formattedValue, $alias);
+        $this->field = $field;
+        $this->value = $value;
     }
 
-    private function formatValue(string $format, string $value) : string
+    public function getFilter(QueryBuilder $queryBuilder) : ?string
     {
-        return sprintf($format, $value);
+        return $queryBuilder->expr()->like(
+            $this->field,
+            $this->value->transform($queryBuilder)
+        );
     }
 }

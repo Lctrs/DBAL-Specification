@@ -6,10 +6,15 @@ namespace Lctrs\DBALSpecification\Query;
 
 use Doctrine\DBAL\Query\QueryBuilder;
 
-final class LeftJoin extends AbstractJoin
+final class LeftJoin extends Join
 {
-    protected function doJoin(QueryBuilder $queryBuilder, string $alias) : void
+    protected function doJoin(QueryBuilder $queryBuilder) : void
     {
-        $queryBuilder->leftJoin($alias, $this->join, $this->alias, $this->condition->getFilter($queryBuilder, $alias));
+        $queryBuilder->leftJoin(
+            $this->fromAlias,
+            $this->join,
+            $this->alias,
+            $this->condition->getFilter($queryBuilder)
+        );
     }
 }

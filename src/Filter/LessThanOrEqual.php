@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Lctrs\DBALSpecification\Filter;
 
+use Doctrine\DBAL\Query\QueryBuilder;
+
 final class LessThanOrEqual extends Comparison
 {
-    public function __construct(string $field, string $value, ?string $alias = null)
+    protected function doComparison(QueryBuilder $queryBuilder, string $x, string $y) : string
     {
-        parent::__construct(self::LTE, $field, $value, $alias);
+        return $queryBuilder->expr()->lte($x, $y);
     }
 }

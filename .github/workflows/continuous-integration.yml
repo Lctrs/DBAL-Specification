@@ -30,6 +30,9 @@ jobs:
             
             - name: "Run doctrine/coding-standard"
               run: php7.2 vendor/bin/phpcs
+            
+            - name: "Run maglnet/composer-require-checker"
+              run: php7.2 vendor/bin/composer-require-checker
     
     static-code-analysis:
         name: "Static Code Analysis"
@@ -81,9 +84,6 @@ jobs:
             - name: "Run unit tests with phpunit/phpunit"
               run: ${{ matrix.php-binary }} vendor/bin/phpunit --configuration=test/Unit/phpunit.xml.dist
 
-            - name: "Run unit tests with phpspec/phpspec"
-              run: ${{ matrix.php-binary }} vendor/bin/phpspec run --format=dot
-
     code-coverage:
         name: "Code Coverage"
     
@@ -121,4 +121,4 @@ jobs:
               run: php7.3 $(which composer) install --no-interaction --no-progress --no-suggest
 
             - name: "Run mutation tests with infection/infection"
-              run: php7.3 vendor/bin/infection --ignore-msi-with-no-mutations --min-covered-msi=100 --min-msi=0
+              run: php7.3 vendor/bin/infection --ignore-msi-with-no-mutations --min-covered-msi=100 --min-msi=100

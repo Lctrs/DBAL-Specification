@@ -4,24 +4,15 @@ declare(strict_types=1);
 
 namespace Lctrs\DBALSpecification\Logic;
 
-use Lctrs\DBALSpecification\Filter;
-use Lctrs\DBALSpecification\QueryModifier;
+use Doctrine\DBAL\Query\Expression\ExpressionBuilder;
 
 final class AndX extends LogicX
 {
     /**
-     * @param Filter[]|QueryModifier[] ...$children
+     * @inheritDoc
      */
-    public function __construct(...$children)
+    protected function doGetFilters(ExpressionBuilder $expressionBuilder, array $filters) : ?string
     {
-        parent::__construct(self::ANDX, $children);
-    }
-
-    /**
-     * @param Filter|QueryModifier $child
-     */
-    public function andX($child) : void
-    {
-        $this->append($child);
+        return (string) $expressionBuilder->andX(...$filters);
     }
 }
