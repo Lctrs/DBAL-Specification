@@ -1,40 +1,40 @@
 {
-    "name": "lctrs/dbal-specification",
-    "type": "library",
-    "description": "Specification pattern for DBAL repositories",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Jérôme Parmentier",
-            "email": "jerome@prmntr.me"
-        }
-    ],
-    "require": {
-        "php": "^7.2",
-        "doctrine/dbal": "^2.9.2"
-    },
-    "require-dev": {
-        "doctrine/coding-standard": "^6.0",
-        "infection/infection": "^0.14.1",
-        "localheinz/composer-normalize": "^1.3",
-        "maglnet/composer-require-checker": "^2.0",
-        "phpstan/phpstan": "^0.11.16",
-        "phpstan/phpstan-deprecation-rules": "^0.11.2",
-        "phpstan/phpstan-phpunit": "^0.11.2",
-        "phpstan/phpstan-strict-rules": "^0.11.1",
-        "phpunit/phpunit": "^8.4.1"
-    },
-    "config": {
-        "sort-packages": true
-    },
-    "autoload": {
-        "psr-4": {
-            "Lctrs\\DBALSpecification\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Lctrs\\DBALSpecification\\Test\\": "test/"
-        }
+  "name": "lctrs/dbal-specification",
+  "type": "library",
+  "description": "Specification pattern for DBAL repositories",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Jérôme Parmentier",
+      "email": "jerome@prmntr.me"
     }
+  ],
+  "require": {
+    "php": "^7.2",
+    "doctrine/dbal": "^2.9.2"
+  },
+  "require-dev": {
+    "doctrine/coding-standard": "^6.0",
+    "infection/infection": "^0.14.1",
+    "localheinz/composer-normalize": "^1.3",
+    "maglnet/composer-require-checker": "^2.0",
+    "phpstan/phpstan": "^0.11.16",
+    "phpstan/phpstan-deprecation-rules": "^0.11.2",
+    "phpstan/phpstan-phpunit": "^0.11.2",
+    "phpstan/phpstan-strict-rules": "^0.11.1",
+    "phpunit/phpunit": "^8.4.1"
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "autoload": {
+    "psr-4": {
+      "Lctrs\\DBALSpecification\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Lctrs\\DBALSpecification\\Test\\": "test/"
+    }
+  }
 }

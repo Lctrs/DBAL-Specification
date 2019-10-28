@@ -7,8 +7,8 @@ includes:
 	- vendor/phpstan/phpstan/conf/config.levelmax.neon
 
 parameters:
-    inferPrivatePropertyTypeFromConstructor: true
-    paths:
-        - src
-        - test
-    tmpDir: %currentWorkingDirectory%/.build/phpstan
+	inferPrivatePropertyTypeFromConstructor: true
+	paths:
+		- src
+		- test
+	tmpDir: %currentWorkingDirectory%/.build/phpstan
