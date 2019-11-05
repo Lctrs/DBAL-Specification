@@ -34,6 +34,7 @@ final class OrXTest extends LogicXTest
     {
         return [
             'select' => [],
+            'distinct' => false,
             'from' => [],
             'join' => [],
             'set' => [],
