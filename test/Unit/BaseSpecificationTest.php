@@ -63,6 +63,7 @@ final class BaseSpecificationTest extends TestCase
         self::assertSame(
             [
                 'select' => [],
+                'distinct' => false,
                 'from' => [],
                 'join' => [],
                 'set' => [],

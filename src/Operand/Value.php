@@ -15,7 +15,7 @@ final class Value implements Operand
 
     /**
      * @param mixed $value
-     * @param mixed $type  One of Doctrine\DBAL\ParameterType::* or \Doctrine\DBAL\Types\Type::* constant
+     * @param mixed $type  One of Doctrine\DBAL\ParameterType::* or \Doctrine\DBAL\Types\Types::* constant
      */
     public function __construct($value, $type = null)
     {

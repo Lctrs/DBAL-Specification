@@ -7,7 +7,7 @@ namespace Lctrs\DBALSpecification\Test\Unit\Operand;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\ParameterType;
 use Doctrine\DBAL\Query\QueryBuilder;
-use Doctrine\DBAL\Types\Type;
+use Doctrine\DBAL\Types\Types;
 use Lctrs\DBALSpecification\Operand\Value;
 use PHPUnit\Framework\TestCase;
 
@@ -43,7 +43,7 @@ final class ValueTest extends TestCase
     {
         yield [null];
         yield [ParameterType::INTEGER];
-        yield [Type::DECIMAL];
+        yield [Types::DECIMAL];
         yield [Connection::PARAM_INT_ARRAY];
         yield [Connection::PARAM_STR_ARRAY];
     }

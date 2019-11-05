@@ -32,6 +32,7 @@ final class AndXTest extends LogicXTest
     {
         return [
             'select' => [],
+            'distinct' => false,
             'from' => [
                 0 => [
                     'table' => 'aTable',
