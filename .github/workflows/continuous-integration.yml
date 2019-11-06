@@ -24,7 +24,7 @@ jobs:
       
       - name: "Validate composer.json and composer.lock"
         run: php7.2 $(which composer) validate --strict
-
+      
       - name: "Cache dependencies installed with composer"
         uses: actions/cache@v1.0.0
         with:
@@ -32,7 +32,7 @@ jobs:
           key: php7.2-composer-locked-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
             php7.2-composer-locked-
-
+      
       - name: "Install locked dependencies with composer"
         run: php7.2 $(which composer) install --no-interaction --no-progress --no-suggest
       
@@ -56,7 +56,7 @@ jobs:
       
       - name: "Disable Xdebug"
         run: php7.3 --ini | grep xdebug | sed 's/,$//' | xargs sudo rm
-
+      
       - name: "Cache dependencies installed with composer"
         uses: actions/cache@v1.0.0
         with:
@@ -64,13 +64,13 @@ jobs:
           key: php7.3-composer-locked-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
             php7.3-composer-locked-
-
+      
       - name: "Install locked dependencies with composer"
         run: php7.3 $(which composer) install --no-interaction --no-progress --no-suggest
       
       - name: "Run phpstan/phpstan"
         run: php7.3 vendor/bin/phpstan analyse
-        
+      
       - name: "Run vimeo/psalm"
         run: php7.3 vendor/bin/psalm
   
@@ -96,7 +96,7 @@ jobs:
       
       - name: "Disable Xdebug"
         run: ${{ matrix.php-binary }} --ini | grep xdebug | sed 's/,$//' | xargs sudo rm
-
+      
       - name: "Cache dependencies installed with composer"
         uses: actions/cache@v1.0.0
         with:
@@ -104,7 +104,7 @@ jobs:
           key: ${{ matrix.php-binary }}-composer-${{ matrix.dependencies }}-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
             ${{ matrix.php-binary }}-composer-${{ matrix.dependencies }}-
-
+      
       - name: "Install lowest dependencies with composer"
         if: matrix.dependencies == 'lowest'
         run: ${{ matrix.php-binary }} $(which composer) update --no-interaction --no-progress --no-suggest --prefer-lowest --prefer-stable
@@ -128,7 +128,7 @@ jobs:
     steps:
       - name: "Checkout"
         uses: actions/checkout@master
-
+      
       - name: "Cache dependencies installed with composer"
         uses: actions/cache@v1.0.0
         with:
@@ -136,7 +136,7 @@ jobs:
           key: php7.3-composer-locked-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
             php7.3-composer-locked-
-
+      
       - name: "Install locked dependencies with composer"
         run: php7.3 $(which composer) install --no-interaction --no-progress --no-suggest
       
@@ -146,11 +146,10 @@ jobs:
       - name: "Collect code coverage with Xdebug and phpunit/phpunit"
         run: php7.3 vendor/bin/phpunit --configuration=test/Unit/phpunit.xml.dist --coverage-clover=build/logs/clover.xml --prepend=.build/phpunit/xdebug-filter.php
       
-      - name: "Download code coverage uploader for Codecov.io"
-        run: curl -s https://codecov.io/bash -o codecov
-      
       - name: "Send code coverage report to Codecov.io"
-        run: bash codecov -t ${{ secrets.CODECOV_TOKEN }}
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        run: bash <(curl -s https://codecov.io/bash)
   
   mutation-tests:
     name: "Mutation Tests"
@@ -160,7 +159,7 @@ jobs:
     steps:
       - name: "Checkout"
         uses: actions/checkout@master
-
+      
       - name: "Cache dependencies installed with composer"
         uses: actions/cache@v1.0.0
         with:
@@ -168,7 +167,7 @@ jobs:
           key: php7.3-composer-locked-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
             php7.3-composer-locked-
-
+      
       - name: "Install locked dependencies with composer"
         run: php7.3 $(which composer) install --no-interaction --no-progress --no-suggest
       
