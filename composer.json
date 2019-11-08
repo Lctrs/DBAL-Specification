@@ -27,6 +27,9 @@
     "vimeo/psalm": "^3.6.3"
   },
   "config": {
+    "platform": {
+      "php": "7.2.24"
+    },
     "sort-packages": true
   },
   "autoload": {
