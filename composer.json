@@ -10,7 +10,7 @@
     }
   ],
   "require": {
-    "php": "^7.2",
+    "php": "^7.2.9",
     "doctrine/dbal": "^2.10.0"
   },
   "require-dev": {
@@ -27,9 +27,6 @@
     "vimeo/psalm": "^3.6.6"
   },
   "config": {
-    "platform": {
-      "php": "7.2.24"
-    },
     "sort-packages": true
   },
   "autoload": {
