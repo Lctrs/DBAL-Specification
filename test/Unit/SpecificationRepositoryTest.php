@@ -10,6 +10,7 @@ use Doctrine\DBAL\Query\Expression\ExpressionBuilder;
 use Doctrine\DBAL\Query\QueryBuilder;
 use Lctrs\DBALSpecification\BaseSpecification;
 use Lctrs\DBALSpecification\Exception\UnsupportedQueryType;
+use Lctrs\DBALSpecification\Filter;
 use Lctrs\DBALSpecification\Filter\Equals;
 use Lctrs\DBALSpecification\Logic\AndX;
 use Lctrs\DBALSpecification\Operand\Field;
@@ -83,6 +84,34 @@ final class SpecificationRepositoryTest extends TestCase
                     new From('bar'),
                     new Equals(new Field('baz'), new Value('qux')),
                 ]);
+            }
+        });
+    }
+
+    public function testANullFilterIsNotApplied() : void
+    {
+        $this->connection->expects(self::once())
+            ->method('executeQuery')
+            ->with(
+                'SELECT ',
+                [],
+                []
+            )
+            ->willReturn($this->createMock(ResultStatement::class));
+
+        $this->instance->match(new class extends BaseSpecification {
+            /**
+             * @inheritDoc
+             */
+            protected function getSpec()
+            {
+                return new class implements Filter
+                {
+                    public function getFilter(QueryBuilder $queryBuilder) : ?string
+                    {
+                        return null;
+                    }
+                };
             }
         });
     }
