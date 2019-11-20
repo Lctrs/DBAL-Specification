@@ -13,19 +13,19 @@ name: "Continuous Integration"
 jobs:
   coding-standards:
     name: "Coding Standards"
-    
+
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: "Checkout"
         uses: actions/checkout@v1.1.0
-      
+
       - name: "Disable Xdebug"
         run: php7.2 --ini | grep xdebug | sed 's/,$//' | xargs sudo rm
-      
+
       - name: "Validate composer.json and composer.lock"
         run: php7.2 $(which composer) validate --strict
-      
+
       - name: "Cache dependencies installed with composer"
         uses: actions/cache@v1.0.1
         with:
@@ -33,31 +33,28 @@ jobs:
           key: php7.2-composer-locked-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
             php7.2-composer-locked-
-      
+
       - name: "Install locked dependencies with composer"
         run: php7.2 $(which composer) install --no-interaction --no-progress --no-suggest
-      
+
       - name: "Run localheinz/composer-normalize"
         run: php7.2 $(which composer) normalize --dry-run
-      
+
       - name: "Run doctrine/coding-standard"
         run: php7.2 vendor/bin/phpcs
-      
-      - name: "Run maglnet/composer-require-checker"
-        run: php7.2 vendor/bin/composer-require-checker
-  
-  static-code-analysis:
-    name: "Static Code Analysis"
-    
+
+  dependency-analysis:
+    name: "Dependency Analysis"
+
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: "Checkout"
         uses: actions/checkout@v1.1.0
-      
+
       - name: "Disable Xdebug"
         run: php7.3 --ini | grep xdebug | sed 's/,$//' | xargs sudo rm
-      
+
       - name: "Cache dependencies installed with composer"
         uses: actions/cache@v1.0.1
         with:
@@ -65,39 +62,65 @@ jobs:
           key: php7.3-composer-locked-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
             php7.3-composer-locked-
-      
+
       - name: "Install locked dependencies with composer"
         run: php7.3 $(which composer) install --no-interaction --no-progress --no-suggest
-      
+
+      - name: "Run maglnet/composer-require-checker"
+        run: php7.3 vendor/bin/composer-require-checker
+
+  static-code-analysis:
+    name: "Static Code Analysis"
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v1.1.0
+
+      - name: "Disable Xdebug"
+        run: php7.3 --ini | grep xdebug | sed 's/,$//' | xargs sudo rm
+
+      - name: "Cache dependencies installed with composer"
+        uses: actions/cache@v1.0.1
+        with:
+          path: ~/.composer/cache
+          key: php7.3-composer-locked-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            php7.3-composer-locked-
+
+      - name: "Install locked dependencies with composer"
+        run: php7.3 $(which composer) install --no-interaction --no-progress --no-suggest
+
       - name: "Run phpstan/phpstan"
         run: php7.3 vendor/bin/phpstan analyse
-      
+
       - name: "Run vimeo/psalm"
         run: php7.3 vendor/bin/psalm
-  
+
   tests:
     name: "Tests"
-    
+
     runs-on: ubuntu-latest
-    
+
     strategy:
       matrix:
         php-binary:
           - php7.2
           - php7.3
-        
+
         dependencies:
           - lowest
           - locked
           - highest
-    
+
     steps:
       - name: "Checkout"
         uses: actions/checkout@v1.1.0
-      
+
       - name: "Disable Xdebug"
         run: ${{ matrix.php-binary }} --ini | grep xdebug | sed 's/,$//' | xargs sudo rm
-      
+
       - name: "Cache dependencies installed with composer"
         uses: actions/cache@v1.0.1
         with:
@@ -105,31 +128,31 @@ jobs:
           key: ${{ matrix.php-binary }}-composer-${{ matrix.dependencies }}-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
             ${{ matrix.php-binary }}-composer-${{ matrix.dependencies }}-
-      
+
       - name: "Install lowest dependencies with composer"
         if: matrix.dependencies == 'lowest'
         run: ${{ matrix.php-binary }} $(which composer) update --no-interaction --no-progress --no-suggest --prefer-lowest
-      
+
       - name: "Install locked dependencies with composer"
         if: matrix.dependencies == 'locked'
         run: ${{ matrix.php-binary }} $(which composer) install --no-interaction --no-progress --no-suggest
-      
+
       - name: "Install highest dependencies with composer"
         if: matrix.dependencies == 'highest'
         run: ${{ matrix.php-binary }} $(which composer) update --no-interaction --no-progress --no-suggest
-      
+
       - name: "Run unit tests with phpunit/phpunit"
         run: ${{ matrix.php-binary }} vendor/bin/phpunit --configuration=test/Unit/phpunit.xml.dist
-  
+
   code-coverage:
     name: "Code Coverage"
-    
+
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: "Checkout"
         uses: actions/checkout@v1.1.0
-      
+
       - name: "Cache dependencies installed with composer"
         uses: actions/cache@v1.0.1
         with:
@@ -137,30 +160,30 @@ jobs:
           key: php7.3-composer-locked-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
             php7.3-composer-locked-
-      
+
       - name: "Install locked dependencies with composer"
         run: php7.3 $(which composer) install --no-interaction --no-progress --no-suggest
-      
+
       - name: "Dump Xdebug filter with phpunit/phpunit"
         run: php7.3 vendor/bin/phpunit --configuration=test/Unit/phpunit.xml.dist --dump-xdebug-filter=.build/phpunit/xdebug-filter.php
-      
+
       - name: "Collect code coverage with Xdebug and phpunit/phpunit"
         run: php7.3 vendor/bin/phpunit --configuration=test/Unit/phpunit.xml.dist --coverage-clover=build/logs/clover.xml --prepend=.build/phpunit/xdebug-filter.php
-      
+
       - name: "Send code coverage report to Codecov.io"
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         run: bash <(curl -s https://codecov.io/bash)
-  
+
   mutation-tests:
     name: "Mutation Tests"
-    
+
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: "Checkout"
         uses: actions/checkout@v1.1.0
-      
+
       - name: "Cache dependencies installed with composer"
         uses: actions/cache@v1.0.1
         with:
@@ -168,9 +191,9 @@ jobs:
           key: php7.3-composer-locked-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
             php7.3-composer-locked-
-      
+
       - name: "Install locked dependencies with composer"
         run: php7.3 $(which composer) install --no-interaction --no-progress --no-suggest
-      
+
       - name: "Run mutation tests with infection/infection"
         run: php7.3 vendor/bin/infection --ignore-msi-with-no-mutations --min-covered-msi=100 --min-msi=100
