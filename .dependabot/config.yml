@@ -5,14 +5,18 @@ version: 1
 update_configs:
   - default_assignees:
       - "Lctrs"
+    default_labels:
+      - "dependency"
     default_reviewers:
       - "Lctrs"
     directory: "/"
     package_manager: "github_actions"
     update_schedule: "weekly"
-  
+
   - default_assignees:
       - "Lctrs"
+    default_labels:
+      - "dependency"
     default_reviewers:
       - "Lctrs"
     directory: "/"
