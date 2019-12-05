@@ -1,0 +1,7 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Method Lctrs\\\\DBALSpecification\\\\SpecificationRepository\\:\\:match\\(\\) return type has no value type specified in iterable type Doctrine\\\\DBAL\\\\Driver\\\\ResultStatement\\.$#"
+			count: 1
+			path: src/SpecificationRepository.php
+
