@@ -26,10 +26,10 @@ jobs:
 
     steps:
       - name: "Checkout"
-        uses: actions/checkout@v1.1.0
+        uses: actions/checkout@v1
 
       - name: "Install PHP with extensions"
-        uses: shivammathur/setup-php@1.5.5
+        uses: shivammathur/setup-php@v1
         with:
           coverage: none
           extension-csv: dom, iconv, json, libxml, mbstring, pcre, PDO, Phar, Reflection, SimpleXML, SPL, tokenizer, xml, xmlwriter
@@ -39,7 +39,7 @@ jobs:
         run: composer validate --strict
 
       - name: "Cache dependencies installed with composer"
-        uses: actions/cache@v1.0.2
+        uses: actions/cache@v1
         with:
           path: ~/.composer/cache
           key: php${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('**/composer.lock') }}
@@ -70,17 +70,17 @@ jobs:
 
     steps:
       - name: "Checkout"
-        uses: actions/checkout@v1.1.0
+        uses: actions/checkout@v1
 
       - name: "Install PHP with extensions"
-        uses: shivammathur/setup-php@1.5.5
+        uses: shivammathur/setup-php@v1
         with:
           coverage: none
           extension-csv: dom, iconv, json, libxml, mbstring, pcre, PDO, Phar, Reflection, SimpleXML, SPL, tokenizer, xml, xmlwriter
           php-version: ${{ matrix.php-version }}
 
       - name: "Cache dependencies installed with composer"
-        uses: actions/cache@v1.0.2
+        uses: actions/cache@v1
         with:
           path: ~/.composer/cache
           key: php${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('**/composer.lock') }}
@@ -108,17 +108,17 @@ jobs:
 
     steps:
       - name: "Checkout"
-        uses: actions/checkout@v1.1.0
+        uses: actions/checkout@v1
 
       - name: "Install PHP with extensions"
-        uses: shivammathur/setup-php@1.5.5
+        uses: shivammathur/setup-php@v1
         with:
           coverage: none
           extension-csv: dom, iconv, json, libxml, mbstring, pcre, PDO, Phar, Reflection, SimpleXML, SPL, tokenizer, xml, xmlwriter
           php-version: ${{ matrix.php-version }}
 
       - name: "Cache dependencies installed with composer"
-        uses: actions/cache@v1.0.2
+        uses: actions/cache@v1
         with:
           path: ~/.composer/cache
           key: php${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('**/composer.lock') }}
@@ -153,17 +153,17 @@ jobs:
 
     steps:
       - name: "Checkout"
-        uses: actions/checkout@v1.1.0
+        uses: actions/checkout@v1
 
       - name: "Install PHP with extensions"
-        uses: shivammathur/setup-php@1.5.5
+        uses: shivammathur/setup-php@v1
         with:
           coverage: none
           extension-csv: dom, iconv, json, libxml, mbstring, pcre, PDO, Phar, Reflection, SimpleXML, SPL, tokenizer, xml, xmlwriter
           php-version: ${{ matrix.php-version }}
 
       - name: "Cache dependencies installed with composer"
-        uses: actions/cache@v1.0.2
+        uses: actions/cache@v1
         with:
           path: ~/.composer/cache
           key: php${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('**/composer.lock') }}
@@ -200,17 +200,17 @@ jobs:
 
     steps:
       - name: "Checkout"
-        uses: actions/checkout@v1.1.0
+        uses: actions/checkout@v1
 
       - name: "Install PHP with extensions"
-        uses: shivammathur/setup-php@1.5.5
+        uses: shivammathur/setup-php@v1
         with:
           coverage: xdebug
           extension-csv: dom, iconv, json, libxml, mbstring, pcre, PDO, Phar, Reflection, SimpleXML, SPL, tokenizer, xml, xmlwriter
           php-version: ${{ matrix.php-version }}
 
       - name: "Cache dependencies installed with composer"
-        uses: actions/cache@v1.0.2
+        uses: actions/cache@v1
         with:
           path: ~/.composer/cache
           key: php${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('**/composer.lock') }}
@@ -246,17 +246,17 @@ jobs:
 
     steps:
       - name: "Checkout"
-        uses: actions/checkout@v1.1.0
+        uses: actions/checkout@v1
 
       - name: "Install PHP with extensions"
-        uses: shivammathur/setup-php@1.5.5
+        uses: shivammathur/setup-php@v1
         with:
           coverage: xdebug
           extension-csv: dom, iconv, json, libxml, mbstring, pcre, PDO, Phar, Reflection, SimpleXML, SPL, tokenizer, xml, xmlwriter
           php-version: ${{ matrix.php-version }}
 
       - name: "Cache dependencies installed with composer"
-        uses: actions/cache@v1.0.2
+        uses: actions/cache@v1
         with:
           path: ~/.composer/cache
           key: php${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('**/composer.lock') }}
