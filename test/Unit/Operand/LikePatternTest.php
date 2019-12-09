@@ -35,11 +35,13 @@ class LikePatternTest extends TestCase
             '%dummy%',
             LikePattern::CONTAINS,
         ];
+
         yield [
             'dummy',
             '%dummy',
             LikePattern::ENDS_WITH,
         ];
+
         yield [
             'dummy',
             'dummy%',
