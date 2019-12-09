@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3eb54c7ce6efa7db114d6cce8fd28f38",
+    "content-hash": "8259d43838f757929a965410f28d9aa5",
     "packages": [
         {
             "name": "doctrine/cache",
@@ -1131,6 +1131,7 @@
                 "json",
                 "printer"
             ],
+            "abandoned": "ergebnis/json-printer",
             "time": "2018-08-11T23:54:50+00:00"
         },
         {
@@ -1856,16 +1857,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "0.12.0",
+            "version": "0.12.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "1cc06d8493917d16b1742f6c9fd2963c51a4e773"
+                "reference": "15a2c2b7d4195aa712506e14763ef7646ac6a08c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/1cc06d8493917d16b1742f6c9fd2963c51a4e773",
-                "reference": "1cc06d8493917d16b1742f6c9fd2963c51a4e773",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/15a2c2b7d4195aa712506e14763ef7646ac6a08c",
+                "reference": "15a2c2b7d4195aa712506e14763ef7646ac6a08c",
                 "shasum": ""
             },
             "require": {
@@ -1892,7 +1893,7 @@
                 "MIT"
             ],
             "description": "PHPStan - PHP Static Analysis Tool",
-            "time": "2019-12-04T00:09:47+00:00"
+            "time": "2019-12-09T09:13:49+00:00"
         },
         {
             "name": "phpstan/phpstan-deprecation-rules",
