@@ -32,7 +32,7 @@ jobs:
         uses: shivammathur/setup-php@v1
         with:
           coverage: none
-          extension-csv: dom, iconv, json, libxml, mbstring, pcre, PDO, Phar, Reflection, SimpleXML, SPL, tokenizer, xml, xmlwriter
+          extensions: dom, iconv, json, libxml, mbstring, pcre, PDO, Phar, Reflection, SimpleXML, SPL, tokenizer, xml, xmlwriter
           php-version: ${{ matrix.php-version }}
 
       - name: "Validate composer.json and composer.lock"
@@ -76,7 +76,7 @@ jobs:
         uses: shivammathur/setup-php@v1
         with:
           coverage: none
-          extension-csv: dom, iconv, json, libxml, mbstring, pcre, PDO, Phar, Reflection, SimpleXML, SPL, tokenizer, xml, xmlwriter
+          extensions: dom, iconv, json, libxml, mbstring, pcre, PDO, Phar, Reflection, SimpleXML, SPL, tokenizer, xml, xmlwriter
           php-version: ${{ matrix.php-version }}
 
       - name: "Cache dependencies installed with composer"
@@ -114,7 +114,7 @@ jobs:
         uses: shivammathur/setup-php@v1
         with:
           coverage: none
-          extension-csv: dom, iconv, json, libxml, mbstring, pcre, PDO, Phar, Reflection, SimpleXML, SPL, tokenizer, xml, xmlwriter
+          extensions: dom, iconv, json, libxml, mbstring, pcre, PDO, Phar, Reflection, SimpleXML, SPL, tokenizer, xml, xmlwriter
           php-version: ${{ matrix.php-version }}
 
       - name: "Cache dependencies installed with composer"
@@ -159,7 +159,7 @@ jobs:
         uses: shivammathur/setup-php@v1
         with:
           coverage: none
-          extension-csv: dom, iconv, json, libxml, mbstring, pcre, PDO, Phar, Reflection, SimpleXML, SPL, tokenizer, xml, xmlwriter
+          extensions: dom, iconv, json, libxml, mbstring, pcre, PDO, Phar, Reflection, SimpleXML, SPL, tokenizer, xml, xmlwriter
           php-version: ${{ matrix.php-version }}
 
       - name: "Cache dependencies installed with composer"
@@ -206,7 +206,7 @@ jobs:
         uses: shivammathur/setup-php@v1
         with:
           coverage: xdebug
-          extension-csv: dom, iconv, json, libxml, mbstring, pcre, PDO, Phar, Reflection, SimpleXML, SPL, tokenizer, xml, xmlwriter
+          extensions: dom, iconv, json, libxml, mbstring, pcre, PDO, Phar, Reflection, SimpleXML, SPL, tokenizer, xml, xmlwriter
           php-version: ${{ matrix.php-version }}
 
       - name: "Cache dependencies installed with composer"
@@ -252,7 +252,7 @@ jobs:
         uses: shivammathur/setup-php@v1
         with:
           coverage: xdebug
-          extension-csv: dom, iconv, json, libxml, mbstring, pcre, PDO, Phar, Reflection, SimpleXML, SPL, tokenizer, xml, xmlwriter
+          extensions: dom, iconv, json, libxml, mbstring, pcre, PDO, Phar, Reflection, SimpleXML, SPL, tokenizer, xml, xmlwriter
           php-version: ${{ matrix.php-version }}
 
       - name: "Cache dependencies installed with composer"
