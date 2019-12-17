@@ -42,9 +42,9 @@ jobs:
         uses: actions/cache@v1.0.3
         with:
           path: ~/.composer/cache
-          key: php${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('**/composer.lock') }}
+          key: php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
-            php${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-
+            php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-
 
       - name: "Install locked dependencies with composer"
         run: composer install --no-interaction --no-progress --no-suggest
@@ -83,9 +83,9 @@ jobs:
         uses: actions/cache@v1.0.3
         with:
           path: ~/.composer/cache
-          key: php${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('**/composer.lock') }}
+          key: php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
-            php${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-
+            php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-
 
       - name: "Install locked dependencies with composer"
         run: composer install --no-interaction --no-progress --no-suggest
@@ -121,9 +121,9 @@ jobs:
         uses: actions/cache@v1.0.3
         with:
           path: ~/.composer/cache
-          key: php${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('**/composer.lock') }}
+          key: php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
-            php${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-
+            php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-
 
       - name: "Install locked dependencies with composer"
         run: composer install --no-interaction --no-progress --no-suggest
@@ -166,9 +166,9 @@ jobs:
         uses: actions/cache@v1.0.3
         with:
           path: ~/.composer/cache
-          key: php${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('**/composer.lock') }}
+          key: php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
-            php${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-
+            php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-
 
       - name: "Install lowest dependencies with composer"
         if: matrix.dependencies == 'lowest'
@@ -213,9 +213,9 @@ jobs:
         uses: actions/cache@v1.0.3
         with:
           path: ~/.composer/cache
-          key: php${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('**/composer.lock') }}
+          key: php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
-            php${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-
+            php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-
 
       - name: "Install locked dependencies with composer"
         run: composer install --no-interaction --no-progress --no-suggest
@@ -256,9 +256,9 @@ jobs:
         uses: actions/cache@v1.0.3
         with:
           path: ~/.composer/cache
-          key: php${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('**/composer.lock') }}
+          key: php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
-            php${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-
+            php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-
 
       - name: "Install locked dependencies with composer"
         run: composer install --no-interaction --no-progress --no-suggest
