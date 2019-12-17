@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ee86e337d67bc02cd681a972a15d65d4",
+    "content-hash": "b40ea670fe7961338ebc7e1cc56b57c8",
     "packages": [
         {
             "name": "doctrine/cache",
@@ -497,16 +497,16 @@
         },
         {
             "name": "doctrine/coding-standard",
-            "version": "7.0.1",
+            "version": "7.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/coding-standard.git",
-                "reference": "9056d2455466a7f7215d4b8b48582dbb6fc0b6c3"
+                "reference": "d8a60ec4da68025c42795b714f66e277dd3e11de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/coding-standard/zipball/9056d2455466a7f7215d4b8b48582dbb6fc0b6c3",
-                "reference": "9056d2455466a7f7215d4b8b48582dbb6fc0b6c3",
+                "url": "https://api.github.com/repos/doctrine/coding-standard/zipball/d8a60ec4da68025c42795b714f66e277dd3e11de",
+                "reference": "d8a60ec4da68025c42795b714f66e277dd3e11de",
                 "shasum": ""
             },
             "require": {
@@ -554,7 +554,7 @@
                 "standard",
                 "style"
             ],
-            "time": "2019-12-07T07:13:25+00:00"
+            "time": "2019-12-11T07:59:21+00:00"
         },
         {
             "name": "doctrine/instantiator",
