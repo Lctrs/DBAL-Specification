@@ -15,7 +15,7 @@
   },
   "require-dev": {
     "doctrine/coding-standard": "^7.0.2",
-    "ergebnis/composer-normalize": "^2.0.2",
+    "ergebnis/composer-normalize": "^2.1.0",
     "infection/infection": "^0.15.0",
     "maglnet/composer-require-checker": "^2.0.0",
     "phpstan/extension-installer": "^1.0.3",
