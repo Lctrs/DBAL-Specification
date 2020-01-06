@@ -7,8 +7,29 @@
     resolveFromConfigFile="true"
     totallyTyped="true"
 >
+    <issueHandlers>
+        <LessSpecificReturnType errorLevel="info" />
+
+        <!-- https://github.com/sebastianbergmann/phpunit/issues/3742 - PHPUnit mock objects break all over the place -->
+        <InternalMethod>
+            <errorLevel type="suppress">
+                <referencedMethod name="PHPUnit\Framework\MockObject\Builder\InvocationMocker::willReturn" />
+                <referencedMethod name="PHPUnit\Framework\MockObject\Builder\InvocationMocker::method" />
+                <referencedMethod name="PHPUnit\Framework\MockObject\Builder\InvocationMocker::willReturnOnConsecutiveCalls" />
+                <referencedMethod name="PHPUnit\Framework\MockObject\Builder\InvocationMocker::with" />
+                <referencedMethod name="PHPUnit\Framework\MockObject\Builder\InvocationMocker::will" />
+                <referencedMethod name="PHPUnit\Framework\MockObject\Builder\InvocationMocker::withConsecutive" />
+            </errorLevel>
+        </InternalMethod>
+    </issueHandlers>
+
+    <plugins>
+        <pluginClass class="Psalm\PhpUnitPlugin\Plugin" />
+    </plugins>
+
     <projectFiles>
         <directory name="src" />
+        <directory name="test" />
         <ignoreFiles>
             <directory name="vendor" />
         </ignoreFiles>

@@ -37,7 +37,7 @@ final class ValueTest extends TestCase
     }
 
     /**
-     * @return iterable<mixed[]>
+     * @return iterable<int, array<int, mixed>>
      */
     public function getTypes() : iterable
     {

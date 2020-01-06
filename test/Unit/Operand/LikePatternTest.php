@@ -26,7 +26,7 @@ class LikePatternTest extends TestCase
     }
 
     /**
-     * @return iterable<array<int, string>>
+     * @return iterable<int, array<int, string>>
      */
     public function getFormats() : iterable
     {
