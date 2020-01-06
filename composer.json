@@ -11,7 +11,7 @@
   ],
   "require": {
     "php": "^7.2.9",
-    "doctrine/dbal": "^2.10.0"
+    "doctrine/dbal": "^2.10.1"
   },
   "require-dev": {
     "doctrine/coding-standard": "^7.0.2",
