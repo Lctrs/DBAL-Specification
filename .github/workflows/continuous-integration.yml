@@ -30,7 +30,7 @@ jobs:
         uses: actions/checkout@v2.0.0
 
       - name: "Install PHP with extensions"
-        uses: shivammathur/setup-php@1.6.2
+        uses: shivammathur/setup-php@1.7.0
         with:
           coverage: none
           extensions: ${{ env.REQUIRED_PHP_EXTENSIONS }}
@@ -73,7 +73,7 @@ jobs:
         uses: actions/checkout@v2.0.0
 
       - name: "Install PHP with extensions"
-        uses: shivammathur/setup-php@1.6.2
+        uses: shivammathur/setup-php@1.7.0
         with:
           coverage: none
           extensions: ${{ env.REQUIRED_PHP_EXTENSIONS }}
@@ -110,7 +110,7 @@ jobs:
         uses: actions/checkout@v2.0.0
 
       - name: "Install PHP with extensions"
-        uses: shivammathur/setup-php@1.6.2
+        uses: shivammathur/setup-php@1.7.0
         with:
           coverage: none
           extensions: ${{ env.REQUIRED_PHP_EXTENSIONS }}
@@ -154,7 +154,7 @@ jobs:
         uses: actions/checkout@v2.0.0
 
       - name: "Install PHP with extensions"
-        uses: shivammathur/setup-php@1.6.2
+        uses: shivammathur/setup-php@1.7.0
         with:
           coverage: none
           extensions: ${{ env.REQUIRED_PHP_EXTENSIONS }}
@@ -200,7 +200,7 @@ jobs:
         uses: actions/checkout@v2.0.0
 
       - name: "Install PHP with extensions"
-        uses: shivammathur/setup-php@1.6.2
+        uses: shivammathur/setup-php@1.7.0
         with:
           coverage: pcov
           extensions: ${{ env.REQUIRED_PHP_EXTENSIONS }}
@@ -242,7 +242,7 @@ jobs:
         uses: actions/checkout@v2.0.0
 
       - name: "Install PHP with extensions"
-        uses: shivammathur/setup-php@1.6.2
+        uses: shivammathur/setup-php@1.7.0
         with:
           coverage: pcov
           extensions: ${{ env.REQUIRED_PHP_EXTENSIONS }}
