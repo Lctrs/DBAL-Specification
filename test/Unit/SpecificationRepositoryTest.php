@@ -24,7 +24,7 @@ use PHPUnit\Framework\TestCase;
 
 final class SpecificationRepositoryTest extends TestCase
 {
-    /** @var Connection|MockObject */
+    /** @var Connection&MockObject */
     private $connection;
     /** @var SpecificationRepository */
     private $instance;
