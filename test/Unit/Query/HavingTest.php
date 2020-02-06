@@ -39,4 +39,21 @@ final class HavingTest extends TestCase
             $this->queryBuilder->getQueryPart('having')
         );
     }
+
+    public function testItDoesNothingIfFilterReturnsNull() : void
+    {
+        (new Having(
+            new class implements Filter
+            {
+                public function getFilter(QueryBuilder $queryBuilder) : ?string
+                {
+                    return null;
+                }
+            }
+        ))->modify($this->queryBuilder);
+
+        self::assertNull(
+            $this->queryBuilder->getQueryPart('having')
+        );
+    }
 }

@@ -1,7 +1,11 @@
 # DBAL Specification
+
+[![Continuous Deployment](https://github.com/Lctrs/DBAL-Specification/workflows/Continuous%20Deployment/badge.svg)](https://github.com/Lctrs/DBAL-Specification/actions)
 [![Continuous Integration](https://github.com/Lctrs/DBAL-Specification/workflows/Continuous%20Integration/badge.svg)](https://github.com/Lctrs/DBAL-Specification/actions)
-[![Code Coverage](https://img.shields.io/codecov/c/github/Lctrs/DBAL-Specification?style=flat-square)](https://codecov.io/gh/Lctrs/DBAL-Specification)
+
+[![Code Coverage](https://codecov.io/gh/Lctrs/DBAL-Specification/branch/master/graph/badge.svg)](https://codecov.io/gh/Lctrs/DBAL-Specification)
 [![Type Coverage](https://shepherd.dev/github/Lctrs/DBAL-Specification/coverage.svg)](https://shepherd.dev/github/Lctrs/DBAL-Specification)
+
 [![Latest Stable Version](https://img.shields.io/packagist/v/Lctrs/DBAL-Specification?style=flat-square)](https://packagist.org/packages/Lctrs/DBAL-Specification)
 [![Total Downloads](https://img.shields.io/packagist/dt/Lctrs/DBAL-Specification?style=flat-square)](https://packagist.org/packages/Lctrs/DBAL-Specification)
 
@@ -11,10 +15,26 @@ It's heavily inspired from [Happyr's Doctrine Specification library](https://git
 
 ## Installation
 
-```shell
+Run
+
+```
 $ composer require lctrs/dbal-specification
 ```
+
+## Usage
+
+:bulb: This is a great place for showing a few usage examples!
+
+## Changelog
+
+Please have a look at [`CHANGELOG.md`](CHANGELOG.md).
+
+## Contributing
+
+Please have a look at [`CONTRIBUTING.md`](.github/CONTRIBUTING.md).
 
 ## License
 
 This package is licensed using the MIT License.
+
+Please have a look at [`LICENSE.md`](LICENSE.md).

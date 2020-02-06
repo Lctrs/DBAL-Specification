@@ -3,5 +3,4 @@
 /vendor/
 /infection.json
 /phpcs.xml
-/phpspec.yml
 /phpstan.neon
