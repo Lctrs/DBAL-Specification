@@ -24,7 +24,7 @@
 >
     <testsuites>
         <testsuite name="Auto Review Tests">
-            <directory>.</directory>
+            <directory>./</directory>
         </testsuite>
     </testsuites>
 </phpunit>

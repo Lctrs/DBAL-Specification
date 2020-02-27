@@ -19,7 +19,7 @@ final class SrcCodeTest extends TestCase
     public function testSrcClassesHaveUnitTests() : void
     {
         self::assertClassesHaveTests(
-            __DIR__ . '/../../src',
+            __DIR__ . '/../../src/',
             'Lctrs\\DBALSpecification\\',
             'Lctrs\\DBALSpecification\\Test\\Unit\\'
         );
