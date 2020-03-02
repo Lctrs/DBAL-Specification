@@ -9,12 +9,14 @@ use Lctrs\DBALSpecification\Logic\LogicX;
 use Lctrs\DBALSpecification\Logic\OrX;
 use Lctrs\DBALSpecification\Query\GroupBy;
 use Lctrs\DBALSpecification\Query\OrderBy;
+use Lctrs\DBALSpecification\Test\Unit\Filter\Fixture\NullFilter;
 
 final class OrXTest extends LogicXTest
 {
     protected function getLogicX() : LogicX
     {
         return new OrX([
+            new NullFilter(),
             new OrderBy('baz'),
             new Filter\IsNull('foo'),
             new Filter\IsNull('bar'),

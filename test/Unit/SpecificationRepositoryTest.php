@@ -10,7 +10,6 @@ use Doctrine\DBAL\Query\Expression\ExpressionBuilder;
 use Doctrine\DBAL\Query\QueryBuilder;
 use Lctrs\DBALSpecification\BaseSpecification;
 use Lctrs\DBALSpecification\Exception\UnsupportedQueryType;
-use Lctrs\DBALSpecification\Filter;
 use Lctrs\DBALSpecification\Filter\Equals;
 use Lctrs\DBALSpecification\Logic\AndX;
 use Lctrs\DBALSpecification\Operand\Field;
@@ -19,6 +18,7 @@ use Lctrs\DBALSpecification\Query\From;
 use Lctrs\DBALSpecification\Query\Select;
 use Lctrs\DBALSpecification\QueryModifier;
 use Lctrs\DBALSpecification\SpecificationRepository;
+use Lctrs\DBALSpecification\Test\Unit\Filter\Fixture\NullFilter;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -105,13 +105,7 @@ final class SpecificationRepositoryTest extends TestCase
              */
             protected function getSpec()
             {
-                return new class implements Filter
-                {
-                    public function getFilter(QueryBuilder $queryBuilder) : ?string
-                    {
-                        return null;
-                    }
-                };
+                return new NullFilter();
             }
         });
     }

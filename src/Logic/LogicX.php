@@ -9,8 +9,6 @@ use Doctrine\DBAL\Query\QueryBuilder;
 use Lctrs\DBALSpecification\Filter;
 use Lctrs\DBALSpecification\QueryModifier;
 use Lctrs\DBALSpecification\Specification;
-use function array_filter;
-use function array_map;
 
 abstract class LogicX implements Specification
 {
@@ -27,19 +25,24 @@ abstract class LogicX implements Specification
 
     final public function getFilter(QueryBuilder $queryBuilder) : ?string
     {
-        $filters = array_map(
-            static function (Filter $filter) use ($queryBuilder) : ?string {
-                return $filter->getFilter($queryBuilder);
-            },
-            array_filter(
-                $this->children,
-                static function ($spec) : bool {
-                    return $spec instanceof Filter;
-                }
-            )
-        );
+        $filters = [];
+        foreach ($this->children as $child) {
+            if (! $child instanceof Filter) {
+                continue;
+            }
 
-        return $this->doGetFilters($queryBuilder->expr(), $filters);
+            $filter = $child->getFilter($queryBuilder);
+            if ($filter === null) {
+                continue;
+            }
+
+            $filters[] = $filter;
+        }
+
+        return $this->doGetFilters(
+            $queryBuilder->expr(),
+            $filters
+        );
     }
 
     final public function modify(QueryBuilder $queryBuilder) : void
@@ -54,7 +57,7 @@ abstract class LogicX implements Specification
     }
 
     /**
-     * @param (string|null)[] $filters
+     * @param string[] $filters
      */
     abstract protected function doGetFilters(ExpressionBuilder $expressionBuilder, array $filters) : ?string;
 }
