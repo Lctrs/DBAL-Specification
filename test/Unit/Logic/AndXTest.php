@@ -8,12 +8,14 @@ use Lctrs\DBALSpecification\Filter;
 use Lctrs\DBALSpecification\Logic\AndX;
 use Lctrs\DBALSpecification\Logic\LogicX;
 use Lctrs\DBALSpecification\Query\From;
+use Lctrs\DBALSpecification\Test\Unit\Filter\Fixture\NullFilter;
 
 final class AndXTest extends LogicXTest
 {
     protected function getLogicX() : LogicX
     {
         return new AndX([
+            new NullFilter(),
             new Filter\IsNull('foo'),
             new From('aTable'),
             new Filter\IsNull('bar'),
