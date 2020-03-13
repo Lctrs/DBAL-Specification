@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f87008177f252191745d78bd2a26867d",
+    "content-hash": "547c9287d1f50fa5aa06264999390a73",
     "packages": [
         {
             "name": "doctrine/cache",
@@ -2739,16 +2739,16 @@
         },
         {
             "name": "phpstan/phpstan-doctrine",
-            "version": "0.12.9",
+            "version": "0.12.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-doctrine.git",
-                "reference": "af14feb2ed259f9eb16d3107e63d85ed516e30af"
+                "reference": "601f343b05875074454ca72702204592f8844f7d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-doctrine/zipball/af14feb2ed259f9eb16d3107e63d85ed516e30af",
-                "reference": "af14feb2ed259f9eb16d3107e63d85ed516e30af",
+                "url": "https://api.github.com/repos/phpstan/phpstan-doctrine/zipball/601f343b05875074454ca72702204592f8844f7d",
+                "reference": "601f343b05875074454ca72702204592f8844f7d",
                 "shasum": ""
             },
             "require": {
@@ -2799,7 +2799,7 @@
                 "MIT"
             ],
             "description": "Doctrine extensions for PHPStan",
-            "time": "2020-01-10T12:31:37+00:00"
+            "time": "2020-03-13T13:03:08+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
@@ -3298,12 +3298,12 @@
             "version": "0.9.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/psalm/phpunit-psalm-plugin.git",
+                "url": "https://github.com/psalm/psalm-plugin-phpunit.git",
                 "reference": "496c08f088d9e34e1947bca1de52b32b6571bad3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/psalm/phpunit-psalm-plugin/zipball/496c08f088d9e34e1947bca1de52b32b6571bad3",
+                "url": "https://api.github.com/repos/psalm/psalm-plugin-phpunit/zipball/496c08f088d9e34e1947bca1de52b32b6571bad3",
                 "reference": "496c08f088d9e34e1947bca1de52b32b6571bad3",
                 "shasum": ""
             },
