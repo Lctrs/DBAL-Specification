@@ -1,7 +1,8 @@
 # DBAL Specification
 
-[![Continuous Deployment](https://github.com/Lctrs/DBAL-Specification/workflows/Continuous%20Deployment/badge.svg)](https://github.com/Lctrs/DBAL-Specification/actions)
-[![Continuous Integration](https://github.com/Lctrs/DBAL-Specification/workflows/Continuous%20Integration/badge.svg)](https://github.com/Lctrs/DBAL-Specification/actions)
+[![Integrate](https://github.com/Lctrs/DBAL-Specification/workflows/Integrate/badge.svg?branch=master)](https://github.com/Lctrs/DBAL-Specification/actions)
+[![Release](https://github.com/Lctrs/DBAL-Specification/workflows/Release/badge.svg?branch=master)](https://github.com/Lctrs/DBAL-Specification/actions)
+[![Renew](https://github.com/Lctrs/DBAL-Specification/workflows/Renew/badge.svg?branch=master)](https://github.com/Lctrs/DBAL-Specification/actions)
 
 [![Code Coverage](https://codecov.io/gh/Lctrs/DBAL-Specification/branch/master/graph/badge.svg)](https://codecov.io/gh/Lctrs/DBAL-Specification)
 [![Type Coverage](https://shepherd.dev/github/Lctrs/DBAL-Specification/coverage.svg)](https://shepherd.dev/github/Lctrs/DBAL-Specification)

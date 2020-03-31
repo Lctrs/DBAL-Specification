@@ -9,32 +9,33 @@
     resolveFromConfigFile="true"
 >
     <issueHandlers>
-        <LessSpecificReturnType errorLevel="info"/>
+        <LessSpecificReturnType errorLevel="info" />
 
         <!-- https://github.com/sebastianbergmann/phpunit/issues/3742 - PHPUnit mock objects break all over the place -->
         <InternalMethod>
             <errorLevel type="suppress">
-                <referencedMethod name="PHPUnit\Framework\MockObject\Builder\InvocationMocker::willReturn"/>
-                <referencedMethod name="PHPUnit\Framework\MockObject\Builder\InvocationMocker::method"/>
+                <referencedMethod name="PHPUnit\Framework\MockObject\Builder\InvocationMocker::willReturn" />
+                <referencedMethod name="PHPUnit\Framework\MockObject\Builder\InvocationMocker::method" />
                 <referencedMethod
-                    name="PHPUnit\Framework\MockObject\Builder\InvocationMocker::willReturnOnConsecutiveCalls"/>
-                <referencedMethod name="PHPUnit\Framework\MockObject\Builder\InvocationMocker::with"/>
-                <referencedMethod name="PHPUnit\Framework\MockObject\Builder\InvocationMocker::will"/>
-                <referencedMethod name="PHPUnit\Framework\MockObject\Builder\InvocationMocker::withConsecutive"/>
+                    name="PHPUnit\Framework\MockObject\Builder\InvocationMocker::willReturnOnConsecutiveCalls" />
+                <referencedMethod name="PHPUnit\Framework\MockObject\Builder\InvocationMocker::with" />
+                <referencedMethod name="PHPUnit\Framework\MockObject\Builder\InvocationMocker::will" />
+                <referencedMethod name="PHPUnit\Framework\MockObject\Builder\InvocationMocker::withConsecutive" />
             </errorLevel>
         </InternalMethod>
     </issueHandlers>
 
     <plugins>
-        <pluginClass class="Psalm\PhpUnitPlugin\Plugin"/>
-        <pluginClass class="Weirdan\DoctrinePsalmPlugin\Plugin"/>
+        <pluginClass class="Psalm\PhpUnitPlugin\Plugin" />
+        <pluginClass class="Weirdan\DoctrinePsalmPlugin\Plugin" />
     </plugins>
 
     <projectFiles>
-        <directory name="src/"/>
-        <directory name="test/"/>
+        <directory name="src/" />
+        <directory name="test/" />
+        <file name="update-license.php" />
         <ignoreFiles>
-            <directory name="vendor/"/>
+            <directory name="vendor/" />
         </ignoreFiles>
     </projectFiles>
 </psalm>
