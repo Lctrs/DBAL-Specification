@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1e1e9daab9f95307e14e6999e70ba41a",
+    "content-hash": "b0312c4f7086d805e210a1f29b8d5d63",
     "packages": [
         {
             "name": "doctrine/cache",
@@ -574,20 +574,21 @@
         },
         {
             "name": "doctrine/annotations",
-            "version": "v1.8.0",
+            "version": "1.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/annotations.git",
-                "reference": "904dca4eb10715b92569fbcd79e201d5c349b6bc"
+                "reference": "b9d758e831c70751155c698c2f7df4665314a1cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/annotations/zipball/904dca4eb10715b92569fbcd79e201d5c349b6bc",
-                "reference": "904dca4eb10715b92569fbcd79e201d5c349b6bc",
+                "url": "https://api.github.com/repos/doctrine/annotations/zipball/b9d758e831c70751155c698c2f7df4665314a1cb",
+                "reference": "b9d758e831c70751155c698c2f7df4665314a1cb",
                 "shasum": ""
             },
             "require": {
                 "doctrine/lexer": "1.*",
+                "ext-tokenizer": "*",
                 "php": "^7.1"
             },
             "require-dev": {
@@ -597,7 +598,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.7.x-dev"
+                    "dev-master": "1.9.x-dev"
                 }
             },
             "autoload": {
@@ -638,7 +639,7 @@
                 "docblock",
                 "parser"
             ],
-            "time": "2019-10-01T18:55:10+00:00"
+            "time": "2020-04-20T09:18:32+00:00"
         },
         {
             "name": "doctrine/coding-standard",
@@ -5194,16 +5195,16 @@
         },
         {
             "name": "weirdan/doctrine-psalm-plugin",
-            "version": "0.11.0",
+            "version": "0.11.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/weirdan/doctrine-psalm-plugin.git",
-                "reference": "229a38f68991551bef48d5262b4d2ae2dd5785ab"
+                "reference": "8bd1fba0e2156be4b4738dfa195f705b499d3bdc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/weirdan/doctrine-psalm-plugin/zipball/229a38f68991551bef48d5262b4d2ae2dd5785ab",
-                "reference": "229a38f68991551bef48d5262b4d2ae2dd5785ab",
+                "url": "https://api.github.com/repos/weirdan/doctrine-psalm-plugin/zipball/8bd1fba0e2156be4b4738dfa195f705b499d3bdc",
+                "reference": "8bd1fba0e2156be4b4738dfa195f705b499d3bdc",
                 "shasum": ""
             },
             "require": {
@@ -5216,13 +5217,13 @@
                 "slevomat/coding-standard": "6.1.1"
             },
             "require-dev": {
-                "codeception/base": "^2.5 || ^3.0",
+                "codeception/codeception": "^4.0",
                 "composer/semver": "^1.4",
                 "doctrine/coding-standard": "^7.0",
                 "doctrine/doctrine-bundle": "^1.11",
                 "phly/keep-a-changelog": "^2.1",
                 "squizlabs/php_codesniffer": "^3.3",
-                "weirdan/codeception-psalm-module": "^0.2.2"
+                "weirdan/codeception-psalm-module": "^0.6"
             },
             "type": "psalm-plugin",
             "extra": {
@@ -5263,7 +5264,7 @@
                 "static analysis",
                 "static-analysis"
             ],
-            "time": "2020-03-29T21:14:00+00:00"
+            "time": "2020-04-16T11:04:26+00:00"
         }
     ],
     "aliases": [],
