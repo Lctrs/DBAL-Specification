@@ -10,12 +10,12 @@ use Lctrs\DBALSpecification\Operand\Field;
 
 final class GreaterThanOrEqualTest extends ComparisonTest
 {
-    protected function getComparison() : Comparison
+    protected function getComparison(): Comparison
     {
         return new GreaterThanOrEqual(new Field('foo'), new Field('bar'));
     }
 
-    protected function getExpected() : string
+    protected function getExpected(): string
     {
         return 'foo >= bar';
     }

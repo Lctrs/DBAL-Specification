@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Lctrs\DBALSpecification\Operand;
 
 use Doctrine\DBAL\Query\QueryBuilder;
+
 use function sprintf;
 
 final class LikePattern
@@ -23,7 +24,7 @@ final class LikePattern
         $this->format = $format;
     }
 
-    public function transform(QueryBuilder $queryBuilder) : string
+    public function transform(QueryBuilder $queryBuilder): string
     {
         return $queryBuilder->createNamedParameter(
             sprintf($this->format, $this->value)

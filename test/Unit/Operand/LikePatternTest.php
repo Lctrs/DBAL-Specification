@@ -14,7 +14,7 @@ class LikePatternTest extends TestCase
     /**
      * @dataProvider getFormats
      */
-    public function testItFormats(string $value, string $expected, string $format) : void
+    public function testItFormats(string $value, string $expected, string $format): void
     {
         $queryBuilder = new QueryBuilder($this->createMock(Connection::class));
 
@@ -28,7 +28,7 @@ class LikePatternTest extends TestCase
     /**
      * @return iterable<int, array<int, string>>
      */
-    public function getFormats() : iterable
+    public function getFormats(): iterable
     {
         yield [
             'dummy',

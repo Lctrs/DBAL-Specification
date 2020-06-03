@@ -16,7 +16,7 @@ final class LikeTest extends TestCase
     /** @var QueryBuilder */
     private $queryBuilder;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $connection  = $this->createMock(Connection::class);
         $exprBuilder = new ExpressionBuilder($connection);
@@ -29,7 +29,7 @@ final class LikeTest extends TestCase
         $this->queryBuilder = new QueryBuilder($connection);
     }
 
-    public function testItCallsLike() : void
+    public function testItCallsLike(): void
     {
         self::assertSame(
             'foo LIKE :dcValue1',
@@ -41,7 +41,7 @@ final class LikeTest extends TestCase
         );
     }
 
-    public function testItUsesAlias() : void
+    public function testItUsesAlias(): void
     {
         self::assertSame(
             'x.foo LIKE :dcValue1',

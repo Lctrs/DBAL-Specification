@@ -14,12 +14,12 @@ final class OffsetTest extends TestCase
     /** @var QueryBuilder */
     protected $queryBuilder;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->queryBuilder = new QueryBuilder($this->createMock(Connection::class));
     }
 
-    public function testItSetsOffset() : void
+    public function testItSetsOffset(): void
     {
         (new Offset(10))->modify($this->queryBuilder);
 

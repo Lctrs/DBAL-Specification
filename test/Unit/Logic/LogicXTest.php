@@ -15,7 +15,7 @@ abstract class LogicXTest extends TestCase
     /** @var QueryBuilder */
     protected $queryBuilder;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $connection  = $this->createMock(Connection::class);
         $exprBuilder = new ExpressionBuilder($connection);
@@ -28,7 +28,7 @@ abstract class LogicXTest extends TestCase
         $this->queryBuilder = new QueryBuilder($connection);
     }
 
-    public function testGetFilters() : void
+    public function testGetFilters(): void
     {
         self::assertSame(
             $this->getExpected(),
@@ -36,7 +36,7 @@ abstract class LogicXTest extends TestCase
         );
     }
 
-    public function testItModifies() : void
+    public function testItModifies(): void
     {
         $this->getLogicX()->modify($this->queryBuilder);
 
@@ -46,12 +46,12 @@ abstract class LogicXTest extends TestCase
         );
     }
 
-    abstract protected function getLogicX() : LogicX;
+    abstract protected function getLogicX(): LogicX;
 
-    abstract protected function getExpected() : string;
+    abstract protected function getExpected(): string;
 
     /**
      * @return mixed[]
      */
-    abstract protected function getExpectedQueryParts() : array;
+    abstract protected function getExpectedQueryParts(): array;
 }

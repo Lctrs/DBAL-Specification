@@ -18,7 +18,7 @@ final class Having implements QueryModifier
         $this->filter = $filter;
     }
 
-    public function modify(QueryBuilder $queryBuilder) : void
+    public function modify(QueryBuilder $queryBuilder): void
     {
         $filter = $this->filter->getFilter($queryBuilder);
         if ($filter === null) {

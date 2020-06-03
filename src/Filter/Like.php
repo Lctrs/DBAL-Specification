@@ -21,7 +21,7 @@ final class Like implements Filter
         $this->value = $value;
     }
 
-    public function getFilter(QueryBuilder $queryBuilder) : ?string
+    public function getFilter(QueryBuilder $queryBuilder): ?string
     {
         return $queryBuilder->expr()->like(
             $this->field,

@@ -15,7 +15,7 @@ abstract class ComparisonTest extends TestCase
     /** @var QueryBuilder */
     private $queryBuilder;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $connection  = $this->createMock(Connection::class);
         $exprBuilder = new ExpressionBuilder($connection);
@@ -28,7 +28,7 @@ abstract class ComparisonTest extends TestCase
         $this->queryBuilder = new QueryBuilder($connection);
     }
 
-    public function testItDoesComparison() : void
+    public function testItDoesComparison(): void
     {
         self::assertSame(
             $this->getExpected(),
@@ -36,7 +36,7 @@ abstract class ComparisonTest extends TestCase
         );
     }
 
-    abstract protected function getComparison() : Comparison;
+    abstract protected function getComparison(): Comparison;
 
-    abstract protected function getExpected() : string;
+    abstract protected function getExpected(): string;
 }

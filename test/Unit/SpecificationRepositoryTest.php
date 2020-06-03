@@ -29,7 +29,7 @@ final class SpecificationRepositoryTest extends TestCase
     /** @var SpecificationRepository */
     private $instance;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->connection = $this->createMock(Connection::class);
         $queryBuilder     = new QueryBuilder($this->connection);
@@ -45,24 +45,24 @@ final class SpecificationRepositoryTest extends TestCase
             ->method('getExpressionBuilder')
             ->willReturn($exprBuilder);
 
-        $this->instance = new class($this->connection) extends SpecificationRepository {
+        $this->instance = new class ($this->connection) extends SpecificationRepository {
         };
     }
 
-    public function testNotSelectQueryThrowException() : void
+    public function testNotSelectQueryThrowException(): void
     {
         $this->expectException(UnsupportedQueryType::class);
         $this->expectErrorMessage('Only "SELECT" queries are supported.');
 
         $this->instance->match(new class implements QueryModifier {
-            public function modify(QueryBuilder $queryBuilder) : void
+            public function modify(QueryBuilder $queryBuilder): void
             {
                 $queryBuilder->update('foo');
             }
         });
     }
 
-    public function testItMatchesQuery() : void
+    public function testItMatchesQuery(): void
     {
         $this->connection->expects(self::once())
             ->method('executeQuery')
@@ -88,7 +88,7 @@ final class SpecificationRepositoryTest extends TestCase
         });
     }
 
-    public function testANullFilterIsNotApplied() : void
+    public function testANullFilterIsNotApplied(): void
     {
         $this->connection->expects(self::once())
             ->method('executeQuery')

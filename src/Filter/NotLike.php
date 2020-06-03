@@ -21,7 +21,7 @@ final class NotLike implements Filter
         $this->value = $value;
     }
 
-    public function getFilter(QueryBuilder $queryBuilder) : ?string
+    public function getFilter(QueryBuilder $queryBuilder): ?string
     {
         return $queryBuilder->expr()->notLike(
             $this->field,

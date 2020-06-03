@@ -16,7 +16,7 @@ final class ValueTest extends TestCase
     /** @var QueryBuilder */
     protected $queryBuilder;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->queryBuilder = new QueryBuilder($this->createMock(Connection::class));
     }
@@ -26,7 +26,7 @@ final class ValueTest extends TestCase
      *
      * @dataProvider getTypes
      */
-    public function testItCreatesAParameter($type) : void
+    public function testItCreatesAParameter($type): void
     {
         self::assertSame(
             ':dcValue1',
@@ -39,7 +39,7 @@ final class ValueTest extends TestCase
     /**
      * @return iterable<int, array<int, mixed>>
      */
-    public function getTypes() : iterable
+    public function getTypes(): iterable
     {
         yield [null];
         yield [ParameterType::INTEGER];

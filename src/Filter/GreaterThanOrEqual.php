@@ -8,7 +8,7 @@ use Doctrine\DBAL\Query\QueryBuilder;
 
 final class GreaterThanOrEqual extends Comparison
 {
-    protected function doComparison(QueryBuilder $queryBuilder, string $x, string $y) : string
+    protected function doComparison(QueryBuilder $queryBuilder, string $x, string $y): string
     {
         return $queryBuilder->expr()->gte($x, $y);
     }

@@ -11,7 +11,7 @@ final class OrX extends LogicX
     /**
      * @inheritDoc
      */
-    protected function doGetFilters(ExpressionBuilder $expressionBuilder, array $filters) : ?string
+    protected function doGetFilters(ExpressionBuilder $expressionBuilder, array $filters): ?string
     {
         return (string) $expressionBuilder->orX(...$filters);
     }

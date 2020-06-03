@@ -14,12 +14,12 @@ final class DistinctTest extends TestCase
     /** @var QueryBuilder */
     protected $queryBuilder;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->queryBuilder = new QueryBuilder($this->createMock(Connection::class));
     }
 
-    public function testItSetsDistinct() : void
+    public function testItSetsDistinct(): void
     {
         (new Distinct())->modify($this->queryBuilder);
 

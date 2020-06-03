@@ -9,7 +9,7 @@ use Lctrs\DBALSpecification\Filter;
 
 final class NullFilter implements Filter
 {
-    public function getFilter(QueryBuilder $queryBuilder) : ?string
+    public function getFilter(QueryBuilder $queryBuilder): ?string
     {
         return null;
     }

@@ -23,7 +23,7 @@ final class Value implements Operand
         $this->type  = $type;
     }
 
-    public function transform(QueryBuilder $queryBuilder) : string
+    public function transform(QueryBuilder $queryBuilder): string
     {
         return $queryBuilder->createNamedParameter($this->value, $this->type);
     }

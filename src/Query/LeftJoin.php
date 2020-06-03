@@ -8,7 +8,7 @@ use Doctrine\DBAL\Query\QueryBuilder;
 
 final class LeftJoin extends Join
 {
-    protected function doJoin(QueryBuilder $queryBuilder) : void
+    protected function doJoin(QueryBuilder $queryBuilder): void
     {
         $queryBuilder->leftJoin(
             $this->fromAlias,

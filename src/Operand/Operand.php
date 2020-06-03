@@ -8,5 +8,5 @@ use Doctrine\DBAL\Query\QueryBuilder;
 
 interface Operand
 {
-    public function transform(QueryBuilder $queryBuilder) : string;
+    public function transform(QueryBuilder $queryBuilder): string;
 }

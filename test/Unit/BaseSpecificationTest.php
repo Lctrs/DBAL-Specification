@@ -20,7 +20,7 @@ final class BaseSpecificationTest extends TestCase
     /** @var QueryBuilder */
     private $queryBuilder;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $connection  = $this->createMock(Connection::class);
         $exprBuilder = new ExpressionBuilder($connection);
@@ -33,7 +33,7 @@ final class BaseSpecificationTest extends TestCase
         $this->queryBuilder = new QueryBuilder($connection);
     }
 
-    public function testItReturnsFilter() : void
+    public function testItReturnsFilter(): void
     {
         self::assertSame(
             'bar = baz',
@@ -41,7 +41,7 @@ final class BaseSpecificationTest extends TestCase
         );
     }
 
-    public function testItModifiesQuery() : void
+    public function testItModifiesQuery(): void
     {
         $this->getFullSpecification()->modify($this->queryBuilder);
 
@@ -51,12 +51,12 @@ final class BaseSpecificationTest extends TestCase
         );
     }
 
-    public function testItReturnsNoFilter() : void
+    public function testItReturnsNoFilter(): void
     {
         self::assertNull($this->getModifierSpecification()->getFilter($this->queryBuilder));
     }
 
-    public function testItDoesNotModifyQuery() : void
+    public function testItDoesNotModifyQuery(): void
     {
         $this->getFilterSpecification()->modify($this->queryBuilder);
 
@@ -77,7 +77,7 @@ final class BaseSpecificationTest extends TestCase
         );
     }
 
-    private function getFullSpecification() : BaseSpecification
+    private function getFullSpecification(): BaseSpecification
     {
         return new class extends BaseSpecification {
             /**
@@ -93,7 +93,7 @@ final class BaseSpecificationTest extends TestCase
         };
     }
 
-    private function getFilterSpecification() : BaseSpecification
+    private function getFilterSpecification(): BaseSpecification
     {
         return new class extends BaseSpecification {
             /**
@@ -106,7 +106,7 @@ final class BaseSpecificationTest extends TestCase
         };
     }
 
-    private function getModifierSpecification() : BaseSpecification
+    private function getModifierSpecification(): BaseSpecification
     {
         return new class extends BaseSpecification {
             /**

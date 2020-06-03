@@ -11,7 +11,7 @@ final class AndX extends LogicX
     /**
      * @inheritDoc
      */
-    protected function doGetFilters(ExpressionBuilder $expressionBuilder, array $filters) : ?string
+    protected function doGetFilters(ExpressionBuilder $expressionBuilder, array $filters): ?string
     {
         return (string) $expressionBuilder->andX(...$filters);
     }

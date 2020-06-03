@@ -23,7 +23,7 @@ abstract class LogicX implements Specification
         $this->children = $children;
     }
 
-    final public function getFilter(QueryBuilder $queryBuilder) : ?string
+    final public function getFilter(QueryBuilder $queryBuilder): ?string
     {
         $filters = [];
         foreach ($this->children as $child) {
@@ -45,7 +45,7 @@ abstract class LogicX implements Specification
         );
     }
 
-    final public function modify(QueryBuilder $queryBuilder) : void
+    final public function modify(QueryBuilder $queryBuilder): void
     {
         foreach ($this->children as $child) {
             if (! ($child instanceof QueryModifier)) {
@@ -59,5 +59,5 @@ abstract class LogicX implements Specification
     /**
      * @param string[] $filters
      */
-    abstract protected function doGetFilters(ExpressionBuilder $expressionBuilder, array $filters) : ?string;
+    abstract protected function doGetFilters(ExpressionBuilder $expressionBuilder, array $filters): ?string;
 }

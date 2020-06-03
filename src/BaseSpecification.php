@@ -8,7 +8,7 @@ use Doctrine\DBAL\Query\QueryBuilder;
 
 abstract class BaseSpecification implements Specification
 {
-    final public function getFilter(QueryBuilder $queryBuilder) : ?string
+    final public function getFilter(QueryBuilder $queryBuilder): ?string
     {
         $spec = $this->getSpec();
         if (! $spec instanceof Filter) {
@@ -18,7 +18,7 @@ abstract class BaseSpecification implements Specification
         return $spec->getFilter($queryBuilder);
     }
 
-    final public function modify(QueryBuilder $queryBuilder) : void
+    final public function modify(QueryBuilder $queryBuilder): void
     {
         $spec = $this->getSpec();
         if (! $spec instanceof QueryModifier) {

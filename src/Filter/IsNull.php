@@ -17,7 +17,7 @@ final class IsNull implements Filter
         $this->field = $field;
     }
 
-    public function getFilter(QueryBuilder $queryBuilder) : ?string
+    public function getFilter(QueryBuilder $queryBuilder): ?string
     {
         return $queryBuilder->expr()->isNull($this->field);
     }
