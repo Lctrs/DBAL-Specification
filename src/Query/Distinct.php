@@ -9,7 +9,7 @@ use Lctrs\DBALSpecification\QueryModifier;
 
 final class Distinct implements QueryModifier
 {
-    public function modify(QueryBuilder $queryBuilder) : void
+    public function modify(QueryBuilder $queryBuilder): void
     {
         $queryBuilder->distinct();
     }

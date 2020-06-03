@@ -9,7 +9,7 @@ use Lctrs\DBALSpecification\QueryModifier;
 
 final class Update implements QueryModifier
 {
-    public function modify(QueryBuilder $queryBuilder) : void
+    public function modify(QueryBuilder $queryBuilder): void
     {
         $queryBuilder->update('foo');
     }

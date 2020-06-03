@@ -10,7 +10,7 @@ use Lctrs\DBALSpecification\Query\Join;
 
 final class InnerJoinTest extends JoinTest
 {
-    protected function getJoin() : Join
+    protected function getJoin(): Join
     {
         return new InnerJoin(
             'x',
@@ -23,7 +23,7 @@ final class InnerJoinTest extends JoinTest
     /**
      * @return mixed[]
      */
-    protected function getExpectedQueryPart() : array
+    protected function getExpectedQueryPart(): array
     {
         return [
             'x' => [

@@ -14,12 +14,12 @@ final class FieldTest extends TestCase
     /** @var QueryBuilder */
     private $queryBuilder;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->queryBuilder = new QueryBuilder($this->createMock(Connection::class));
     }
 
-    public function testItReturnsField() : void
+    public function testItReturnsField(): void
     {
         self::assertSame(
             'field',

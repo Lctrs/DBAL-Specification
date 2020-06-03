@@ -12,7 +12,7 @@ use Lctrs\DBALSpecification\Test\Unit\Filter\Fixture\NullFilter;
 
 final class AndXTest extends LogicXTest
 {
-    protected function getLogicX() : LogicX
+    protected function getLogicX(): LogicX
     {
         return new AndX([
             new NullFilter(),
@@ -22,7 +22,7 @@ final class AndXTest extends LogicXTest
         ]);
     }
 
-    protected function getExpected() : string
+    protected function getExpected(): string
     {
         return '(foo IS NULL) AND (bar IS NULL)';
     }
@@ -30,7 +30,7 @@ final class AndXTest extends LogicXTest
     /**
      * @return mixed[]
      */
-    protected function getExpectedQueryParts() : array
+    protected function getExpectedQueryParts(): array
     {
         return [
             'select' => [],

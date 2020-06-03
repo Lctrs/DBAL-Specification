@@ -14,12 +14,12 @@ final class LimitTest extends TestCase
     /** @var QueryBuilder */
     protected $queryBuilder;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->queryBuilder = new QueryBuilder($this->createMock(Connection::class));
     }
 
-    public function testItSetsLimit() : void
+    public function testItSetsLimit(): void
     {
         (new Limit(10))->modify($this->queryBuilder);
 

@@ -20,7 +20,7 @@ final class From implements QueryModifier
         $this->alias = $alias;
     }
 
-    public function modify(QueryBuilder $queryBuilder) : void
+    public function modify(QueryBuilder $queryBuilder): void
     {
         $queryBuilder->from($this->table, $this->alias);
     }

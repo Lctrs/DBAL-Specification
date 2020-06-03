@@ -8,5 +8,5 @@ use Doctrine\DBAL\Query\QueryBuilder;
 
 interface Filter
 {
-    public function getFilter(QueryBuilder $queryBuilder) : ?string;
+    public function getFilter(QueryBuilder $queryBuilder): ?string;
 }

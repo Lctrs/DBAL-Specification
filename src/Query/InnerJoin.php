@@ -8,7 +8,7 @@ use Doctrine\DBAL\Query\QueryBuilder;
 
 final class InnerJoin extends Join
 {
-    protected function doJoin(QueryBuilder $queryBuilder) : void
+    protected function doJoin(QueryBuilder $queryBuilder): void
     {
         $queryBuilder->innerJoin(
             $this->fromAlias,

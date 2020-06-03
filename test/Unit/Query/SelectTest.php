@@ -14,12 +14,12 @@ final class SelectTest extends TestCase
     /** @var QueryBuilder */
     protected $queryBuilder;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->queryBuilder = new QueryBuilder($this->createMock(Connection::class));
     }
 
-    public function testItAddsSelect() : void
+    public function testItAddsSelect(): void
     {
         (new Select('foo'))->modify($this->queryBuilder);
 
@@ -29,7 +29,7 @@ final class SelectTest extends TestCase
         );
     }
 
-    public function testItUsesAlias() : void
+    public function testItUsesAlias(): void
     {
         (new Select('x.foo'))->modify($this->queryBuilder);
 

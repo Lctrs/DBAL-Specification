@@ -17,7 +17,7 @@ final class HavingTest extends TestCase
     /** @var QueryBuilder */
     protected $queryBuilder;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $connection  = $this->createMock(Connection::class);
         $exprBuilder = new ExpressionBuilder($connection);
@@ -30,7 +30,7 @@ final class HavingTest extends TestCase
         $this->queryBuilder = new QueryBuilder($connection);
     }
 
-    public function testItAddsHaving() : void
+    public function testItAddsHaving(): void
     {
         (new Having(new Filter\IsNull('foo')))->modify($this->queryBuilder);
 
@@ -40,12 +40,12 @@ final class HavingTest extends TestCase
         );
     }
 
-    public function testItDoesNothingIfFilterReturnsNull() : void
+    public function testItDoesNothingIfFilterReturnsNull(): void
     {
         (new Having(
             new class implements Filter
             {
-                public function getFilter(QueryBuilder $queryBuilder) : ?string
+                public function getFilter(QueryBuilder $queryBuilder): ?string
                 {
                     return null;
                 }

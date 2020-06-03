@@ -14,12 +14,12 @@ final class FromTest extends TestCase
     /** @var QueryBuilder */
     protected $queryBuilder;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->queryBuilder = new QueryBuilder($this->createMock(Connection::class));
     }
 
-    public function testItAddsFrom() : void
+    public function testItAddsFrom(): void
     {
         (new From('foo'))->modify($this->queryBuilder);
 
@@ -34,7 +34,7 @@ final class FromTest extends TestCase
         );
     }
 
-    public function testItUsesAlias() : void
+    public function testItUsesAlias(): void
     {
         (new From('foo', 'x'))->modify($this->queryBuilder);
 

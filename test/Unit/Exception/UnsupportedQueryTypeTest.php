@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 final class UnsupportedQueryTypeTest extends TestCase
 {
-    public function testMessage() : void
+    public function testMessage(): void
     {
         self::assertSame(
             'Only "SELECT" queries are supported.',

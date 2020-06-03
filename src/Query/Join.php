@@ -27,10 +27,10 @@ abstract class Join implements QueryModifier
         $this->condition = $condition;
     }
 
-    public function modify(QueryBuilder $queryBuilder) : void
+    public function modify(QueryBuilder $queryBuilder): void
     {
         $this->doJoin($queryBuilder);
     }
 
-    abstract protected function doJoin(QueryBuilder $queryBuilder) : void;
+    abstract protected function doJoin(QueryBuilder $queryBuilder): void;
 }

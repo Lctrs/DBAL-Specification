@@ -14,12 +14,12 @@ final class GroupByTest extends TestCase
     /** @var QueryBuilder */
     protected $queryBuilder;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->queryBuilder = new QueryBuilder($this->createMock(Connection::class));
     }
 
-    public function testItAddsGroupBy() : void
+    public function testItAddsGroupBy(): void
     {
         (new GroupBy('foo'))->modify($this->queryBuilder);
 
@@ -29,7 +29,7 @@ final class GroupByTest extends TestCase
         );
     }
 
-    public function testItUsesAlias() : void
+    public function testItUsesAlias(): void
     {
         (new GroupBy('x.foo'))->modify($this->queryBuilder);
 

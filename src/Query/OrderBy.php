@@ -20,7 +20,7 @@ final class OrderBy implements QueryModifier
         $this->order = $order;
     }
 
-    public function modify(QueryBuilder $queryBuilder) : void
+    public function modify(QueryBuilder $queryBuilder): void
     {
         $queryBuilder->addOrderBy($this->field, $this->order);
     }

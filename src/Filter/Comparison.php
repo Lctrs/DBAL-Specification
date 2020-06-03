@@ -21,7 +21,7 @@ abstract class Comparison implements Filter
         $this->y = $y;
     }
 
-    final public function getFilter(QueryBuilder $queryBuilder) : ?string
+    final public function getFilter(QueryBuilder $queryBuilder): ?string
     {
         return $this->doComparison(
             $queryBuilder,
@@ -34,5 +34,5 @@ abstract class Comparison implements Filter
         QueryBuilder $queryBuilder,
         string $x,
         string $y
-    ) : string;
+    ): string;
 }

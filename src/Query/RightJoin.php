@@ -8,7 +8,7 @@ use Doctrine\DBAL\Query\QueryBuilder;
 
 final class RightJoin extends Join
 {
-    protected function doJoin(QueryBuilder $queryBuilder) : void
+    protected function doJoin(QueryBuilder $queryBuilder): void
     {
         $queryBuilder->rightJoin(
             $this->fromAlias,

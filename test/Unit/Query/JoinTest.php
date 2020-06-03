@@ -15,7 +15,7 @@ abstract class JoinTest extends TestCase
     /** @var QueryBuilder */
     protected $queryBuilder;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $connection  = $this->createMock(Connection::class);
         $exprBuilder = new ExpressionBuilder($connection);
@@ -28,7 +28,7 @@ abstract class JoinTest extends TestCase
         $this->queryBuilder = new QueryBuilder($connection);
     }
 
-    public function testItJoins() : void
+    public function testItJoins(): void
     {
         $this->getJoin()->modify($this->queryBuilder);
 
@@ -38,10 +38,10 @@ abstract class JoinTest extends TestCase
         );
     }
 
-    abstract protected function getJoin() : Join;
+    abstract protected function getJoin(): Join;
 
     /**
      * @return mixed[]
      */
-    abstract protected function getExpectedQueryPart() : array;
+    abstract protected function getExpectedQueryPart(): array;
 }

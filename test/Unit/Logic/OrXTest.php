@@ -13,7 +13,7 @@ use Lctrs\DBALSpecification\Test\Unit\Filter\Fixture\NullFilter;
 
 final class OrXTest extends LogicXTest
 {
-    protected function getLogicX() : LogicX
+    protected function getLogicX(): LogicX
     {
         return new OrX([
             new NullFilter(),
@@ -24,7 +24,7 @@ final class OrXTest extends LogicXTest
         ]);
     }
 
-    protected function getExpected() : string
+    protected function getExpected(): string
     {
         return '(foo IS NULL) OR (bar IS NULL)';
     }
@@ -32,7 +32,7 @@ final class OrXTest extends LogicXTest
     /**
      * @return mixed[]
      */
-    protected function getExpectedQueryParts() : array
+    protected function getExpectedQueryParts(): array
     {
         return [
             'select' => [],

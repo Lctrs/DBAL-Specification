@@ -15,7 +15,7 @@ final class IsNullTest extends TestCase
     /** @var QueryBuilder */
     private $queryBuilder;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $connection  = $this->createMock(Connection::class);
         $exprBuilder = new ExpressionBuilder($connection);
@@ -28,7 +28,7 @@ final class IsNullTest extends TestCase
         $this->queryBuilder = new QueryBuilder($connection);
     }
 
-    public function testItCallsNotNull() : void
+    public function testItCallsNotNull(): void
     {
         self::assertSame(
             'foo IS NULL',
@@ -36,7 +36,7 @@ final class IsNullTest extends TestCase
         );
     }
 
-    public function testItUsesAlias() : void
+    public function testItUsesAlias(): void
     {
         self::assertSame(
             'x.foo IS NULL',

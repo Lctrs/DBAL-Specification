@@ -17,7 +17,7 @@ final class Select implements QueryModifier
         $this->field = $field;
     }
 
-    public function modify(QueryBuilder $queryBuilder) : void
+    public function modify(QueryBuilder $queryBuilder): void
     {
         $queryBuilder->addSelect($this->field);
     }

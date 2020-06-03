@@ -14,12 +14,12 @@ final class OrderByTest extends TestCase
     /** @var QueryBuilder */
     protected $queryBuilder;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->queryBuilder = new QueryBuilder($this->createMock(Connection::class));
     }
 
-    public function testItAddsOrderBy() : void
+    public function testItAddsOrderBy(): void
     {
         (new OrderBy('foo'))->modify($this->queryBuilder);
 
@@ -29,7 +29,7 @@ final class OrderByTest extends TestCase
         );
     }
 
-    public function testItUsesAlias() : void
+    public function testItUsesAlias(): void
     {
         (new OrderBy('x.foo', 'DESC'))->modify($this->queryBuilder);
 

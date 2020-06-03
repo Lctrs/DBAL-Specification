@@ -16,7 +16,7 @@ final class Field implements Operand
         $this->field = $field;
     }
 
-    public function transform(QueryBuilder $queryBuilder) : string
+    public function transform(QueryBuilder $queryBuilder): string
     {
         return $this->field;
     }
