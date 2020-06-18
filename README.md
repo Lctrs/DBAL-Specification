@@ -18,7 +18,7 @@ It's heavily inspired from [Happyr's Doctrine Specification library](https://git
 
 Run
 
-```
+```sh
 $ composer require lctrs/dbal-specification
 ```
 
