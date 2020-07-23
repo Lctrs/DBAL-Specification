@@ -8,6 +8,7 @@ use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Query\Expression\ExpressionBuilder;
 use Doctrine\DBAL\Query\QueryBuilder;
 use Lctrs\DBALSpecification\Filter\Like;
+use Lctrs\DBALSpecification\Operand\Field;
 use Lctrs\DBALSpecification\Operand\LikePattern;
 use PHPUnit\Framework\TestCase;
 
@@ -33,7 +34,7 @@ final class LikeTest extends TestCase
     {
         self::assertSame(
             'foo LIKE :dcValue1',
-            (new Like('foo', new LikePattern('bar')))->getFilter($this->queryBuilder)
+            (new Like(new Field('foo'), new LikePattern('bar')))->getFilter($this->queryBuilder)
         );
         self::assertSame(
             '%bar%',
@@ -45,7 +46,7 @@ final class LikeTest extends TestCase
     {
         self::assertSame(
             'x.foo LIKE :dcValue1',
-            (new Like('x.foo', new LikePattern('bar')))->getFilter($this->queryBuilder)
+            (new Like(new Field('x.foo'), new LikePattern('bar')))->getFilter($this->queryBuilder)
         );
         self::assertSame(
             '%bar%',

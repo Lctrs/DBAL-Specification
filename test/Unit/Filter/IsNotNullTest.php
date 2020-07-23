@@ -8,6 +8,7 @@ use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Query\Expression\ExpressionBuilder;
 use Doctrine\DBAL\Query\QueryBuilder;
 use Lctrs\DBALSpecification\Filter\IsNotNull;
+use Lctrs\DBALSpecification\Operand\Field;
 use PHPUnit\Framework\TestCase;
 
 final class IsNotNullTest extends TestCase
@@ -32,7 +33,7 @@ final class IsNotNullTest extends TestCase
     {
         self::assertSame(
             'foo IS NOT NULL',
-            (new IsNotNull('foo'))->getFilter($this->queryBuilder)
+            (new IsNotNull(new Field('foo')))->getFilter($this->queryBuilder)
         );
     }
 
@@ -40,7 +41,7 @@ final class IsNotNullTest extends TestCase
     {
         self::assertSame(
             'x.foo IS NOT NULL',
-            (new IsNotNull('x.foo'))->getFilter($this->queryBuilder)
+            (new IsNotNull(new Field('x.foo')))->getFilter($this->queryBuilder)
         );
     }
 }

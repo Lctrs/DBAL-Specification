@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Lctrs\DBALSpecification\Test\Unit\Query;
 
 use Lctrs\DBALSpecification\Filter;
+use Lctrs\DBALSpecification\Operand\Field;
 use Lctrs\DBALSpecification\Query\Join;
 use Lctrs\DBALSpecification\Query\RightJoin;
 
@@ -16,7 +17,7 @@ final class RightJoinTest extends JoinTest
             'x',
             'foo',
             'f',
-            new Filter\IsNull('x.bar')
+            new Filter\IsNull(new Field('x.bar'))
         );
     }
 

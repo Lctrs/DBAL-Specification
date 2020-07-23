@@ -8,6 +8,7 @@ use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Query\Expression\ExpressionBuilder;
 use Doctrine\DBAL\Query\QueryBuilder;
 use Lctrs\DBALSpecification\Filter\NotLike;
+use Lctrs\DBALSpecification\Operand\Field;
 use Lctrs\DBALSpecification\Operand\LikePattern;
 use PHPUnit\Framework\TestCase;
 
@@ -33,7 +34,7 @@ final class NotLikeTest extends TestCase
     {
         self::assertSame(
             'foo NOT LIKE :dcValue1',
-            (new NotLike('foo', new LikePattern('bar')))->getFilter($this->queryBuilder)
+            (new NotLike(new Field('foo'), new LikePattern('bar')))->getFilter($this->queryBuilder)
         );
         self::assertSame(
             '%bar%',
@@ -45,7 +46,7 @@ final class NotLikeTest extends TestCase
     {
         self::assertSame(
             'x.foo NOT LIKE :dcValue1',
-            (new NotLike('x.foo', new LikePattern('bar')))->getFilter($this->queryBuilder)
+            (new NotLike(new Field('x.foo'), new LikePattern('bar')))->getFilter($this->queryBuilder)
         );
         self::assertSame(
             '%bar%',

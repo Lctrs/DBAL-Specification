@@ -13,6 +13,7 @@ final class LikePattern
     public const CONTAINS    = '%%%s%%';
     public const ENDS_WITH   = '%%%s';
     public const STARTS_WITH = '%s%%';
+
     /** @var string */
     private $value;
     /** @var string */
