@@ -7,24 +7,25 @@ namespace Lctrs\DBALSpecification\Filter;
 use Doctrine\DBAL\Query\QueryBuilder;
 use Lctrs\DBALSpecification\Filter;
 use Lctrs\DBALSpecification\Operand\LikePattern;
+use Lctrs\DBALSpecification\Operand\Operand;
 
 final class NotLike implements Filter
 {
-    /** @var string */
-    private $field;
+    /** @var Operand */
+    private $x;
     /** @var LikePattern */
     private $value;
 
-    public function __construct(string $field, LikePattern $value)
+    public function __construct(Operand $x, LikePattern $value)
     {
-        $this->field = $field;
+        $this->x     = $x;
         $this->value = $value;
     }
 
     public function getFilter(QueryBuilder $queryBuilder): ?string
     {
         return $queryBuilder->expr()->notLike(
-            $this->field,
+            $this->x->transform($queryBuilder),
             $this->value->transform($queryBuilder)
         );
     }

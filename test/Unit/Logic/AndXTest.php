@@ -7,6 +7,7 @@ namespace Lctrs\DBALSpecification\Test\Unit\Logic;
 use Lctrs\DBALSpecification\Filter;
 use Lctrs\DBALSpecification\Logic\AndX;
 use Lctrs\DBALSpecification\Logic\LogicX;
+use Lctrs\DBALSpecification\Operand\Field;
 use Lctrs\DBALSpecification\Query\From;
 use Lctrs\DBALSpecification\Test\Unit\Filter\Fixture\NullFilter;
 
@@ -16,9 +17,9 @@ final class AndXTest extends LogicXTest
     {
         return new AndX([
             new NullFilter(),
-            new Filter\IsNull('foo'),
+            new Filter\IsNull(new Field('foo')),
             new From('aTable'),
-            new Filter\IsNull('bar'),
+            new Filter\IsNull(new Field('bar')),
         ]);
     }
 

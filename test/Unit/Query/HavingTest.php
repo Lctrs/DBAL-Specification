@@ -9,6 +9,7 @@ use Doctrine\DBAL\Query\Expression\CompositeExpression;
 use Doctrine\DBAL\Query\Expression\ExpressionBuilder;
 use Doctrine\DBAL\Query\QueryBuilder;
 use Lctrs\DBALSpecification\Filter;
+use Lctrs\DBALSpecification\Operand\Field;
 use Lctrs\DBALSpecification\Query\Having;
 use PHPUnit\Framework\TestCase;
 
@@ -32,7 +33,7 @@ final class HavingTest extends TestCase
 
     public function testItAddsHaving(): void
     {
-        (new Having(new Filter\IsNull('foo')))->modify($this->queryBuilder);
+        (new Having(new Filter\IsNull(new Field('foo'))))->modify($this->queryBuilder);
 
         self::assertEquals(
             new CompositeExpression('AND', ['foo IS NULL']),
