@@ -13,6 +13,6 @@ final class OrX extends LogicX
      */
     protected function doGetFilters(ExpressionBuilder $expressionBuilder, array $filters): ?string
     {
-        return (string) $expressionBuilder->orX(...$filters);
+        return (string) $expressionBuilder->or(...$filters);
     }
 }

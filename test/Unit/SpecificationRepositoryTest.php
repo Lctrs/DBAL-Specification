@@ -69,7 +69,7 @@ final class SpecificationRepositoryTest extends TestCase
             ->with(
                 'SELECT foo FROM bar WHERE baz = :dcValue1',
                 ['dcValue1' => 'qux'],
-                []
+                ['dcValue1' => 2]
             )
             ->willReturn($this->createMock(ResultStatement::class));
 

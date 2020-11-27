@@ -9,6 +9,7 @@ on: # yamllint disable-line rule:truthy
       - "master"
 
 env:
+  LCTRS_BOT_NAME: "lctrs-bot"
   MIN_COVERED_MSI: 100
   MIN_MSI: 100
   PHP_EXTENSIONS: "dom, iconv, json, libxml, mbstring, pcre, PDO, Phar, Reflection, SimpleXML, SPL, tokenizer, xml, xmlwriter"
@@ -39,7 +40,7 @@ jobs:
           strict: true
 
       - name: "Install PHP with extensions"
-        uses: "shivammathur/setup-php@2.7.0"
+        uses: "shivammathur/setup-php@2.9.0"
         with:
           coverage: "none"
           extensions: "${{ env.PHP_EXTENSIONS }}"
@@ -49,27 +50,19 @@ jobs:
         run: "composer validate --strict"
 
       - name: "Determine composer cache directory"
-        id: "determine-composer-cache-directory"
-        run: "echo \"::set-output name=directory::$(composer config cache-dir)\""
+        uses: "./.github/actions/composer/composer/determine-cache-directory"
 
       - name: "Cache dependencies installed with composer"
         uses: "actions/cache@v2.1.3"
         with:
-          path: "${{ steps.determine-composer-cache-directory.outputs.directory }}"
+          path: "${{ env.COMPOSER_CACHE_DIR }}"
           key: "php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('composer.lock') }}"
           restore-keys: "php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-"
 
-      - name: "Install lowest dependencies from composer.json"
-        if: "matrix.dependencies == 'lowest'"
-        run: "composer update --no-interaction --no-progress --no-suggest --prefer-lowest"
-
-      - name: "Install locked dependencies from composer.lock"
-        if: "matrix.dependencies == 'locked'"
-        run: "composer install --no-interaction --no-progress --no-suggest"
-
-      - name: "Install highest dependencies from composer.json"
-        if: "matrix.dependencies == 'highest'"
-        run: "composer update --no-interaction --no-progress --no-suggest"
+      - name: "Install ${{ matrix.dependencies }} dependencies with composer"
+        uses: "./.github/actions/composer/composer/install"
+        with:
+          dependencies: "${{ matrix.dependencies }}"
 
       - name: "Run ergebnis/composer-normalize"
         run: "composer normalize --dry-run"
@@ -81,7 +74,7 @@ jobs:
         uses: "actions/cache@v2.1.3"
         with:
           path: ".build/php_codesniffer"
-          key: "php-${{ matrix.php-version }}-php_codesniffer-${{ hashFiles('composer.lock') }}"
+          key: "php-${{ matrix.php-version }}-php_codesniffer-${{ github.sha }}"
           restore-keys: "php-${{ matrix.php-version }}-php_codesniffer-"
 
       - name: "Run squizlabs/php_codesniffer"
@@ -105,37 +98,33 @@ jobs:
         uses: "actions/checkout@v2.3.4"
 
       - name: "Install PHP with extensions"
-        uses: "shivammathur/setup-php@2.7.0"
+        uses: "shivammathur/setup-php@2.9.0"
         with:
           coverage: "none"
           extensions: "${{ env.PHP_EXTENSIONS }}"
           php-version: "${{ matrix.php-version }}"
+          tools: "phive"
 
       - name: "Determine composer cache directory"
-        id: "determine-composer-cache-directory"
-        run: "echo \"::set-output name=directory::$(composer config cache-dir)\""
+        uses: "./.github/actions/composer/composer/determine-cache-directory"
 
       - name: "Cache dependencies installed with composer"
         uses: "actions/cache@v2.1.3"
         with:
-          path: "${{ steps.determine-composer-cache-directory.outputs.directory }}"
+          path: "${{ env.COMPOSER_CACHE_DIR }}"
           key: "php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('composer.lock') }}"
           restore-keys: "php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-"
 
-      - name: "Install lowest dependencies from composer.json"
-        if: "matrix.dependencies == 'lowest'"
-        run: "composer update --no-interaction --no-progress --no-suggest --prefer-lowest"
+      - name: "Install ${{ matrix.dependencies }} dependencies with composer"
+        uses: "./.github/actions/composer/composer/install"
+        with:
+          dependencies: "${{ matrix.dependencies }}"
 
-      - name: "Install locked dependencies from composer.lock"
-        if: "matrix.dependencies == 'locked'"
-        run: "composer install --no-interaction --no-progress --no-suggest"
-
-      - name: "Install highest dependencies from composer.json"
-        if: "matrix.dependencies == 'highest'"
-        run: "composer update --no-interaction --no-progress --no-suggest"
+      - name: "Install tools with phive"
+        run: "phive --no-progress install --trust-gpg-keys D2CCAC42F6295E7D"
 
       - name: "Run maglnet/composer-require-checker"
-        run: "vendor/bin/composer-require-checker"
+        run: ".phive/composer-require-checker check --config-file=$(pwd)/composer-require-checker.json"
 
   static-code-analysis:
     name: "Static Code Analysis"
@@ -155,34 +144,26 @@ jobs:
         uses: "actions/checkout@v2.3.4"
 
       - name: "Install PHP with extensions"
-        uses: "shivammathur/setup-php@2.7.0"
+        uses: "shivammathur/setup-php@2.9.0"
         with:
           coverage: "none"
           extensions: "${{ env.PHP_EXTENSIONS }}"
           php-version: "${{ matrix.php-version }}"
 
       - name: "Determine composer cache directory"
-        id: "determine-composer-cache-directory"
-        run: "echo \"::set-output name=directory::$(composer config cache-dir)\""
+        uses: "./.github/actions/composer/composer/determine-cache-directory"
 
       - name: "Cache dependencies installed with composer"
         uses: "actions/cache@v2.1.3"
         with:
-          path: "${{ steps.determine-composer-cache-directory.outputs.directory }}"
+          path: "${{ env.COMPOSER_CACHE_DIR }}"
           key: "php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('composer.lock') }}"
           restore-keys: "php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-"
 
-      - name: "Install lowest dependencies from composer.json"
-        if: "matrix.dependencies == 'lowest'"
-        run: "composer update --no-interaction --no-progress --no-suggest --prefer-lowest"
-
-      - name: "Install locked dependencies from composer.lock"
-        if: "matrix.dependencies == 'locked'"
-        run: "composer install --no-interaction --no-progress --no-suggest"
-
-      - name: "Install highest dependencies from composer.json"
-        if: "matrix.dependencies == 'highest'"
-        run: "composer update --no-interaction --no-progress --no-suggest"
+      - name: "Install ${{ matrix.dependencies }} dependencies with composer"
+        uses: "./.github/actions/composer/composer/install"
+        with:
+          dependencies: "${{ matrix.dependencies }}"
 
       - name: "Create cache directory for phpstan/phpstan"
         run: "mkdir -p .build/phpstan"
@@ -195,7 +176,7 @@ jobs:
           restore-keys: "php-${{ matrix.php-version }}-phpstan-"
 
       - name: "Run phpstan/phpstan"
-        run: "vendor/bin/phpstan analyse --configuration=phpstan.neon.dist"
+        run: "vendor/bin/phpstan analyse --configuration=phpstan.neon.dist --memory-limit=-1"
 
       - name: "Create cache directory for vimeo/psalm"
         run: "mkdir -p .build/psalm"
@@ -208,7 +189,7 @@ jobs:
           restore-keys: "php-${{ matrix.php-version }}-psalm-"
 
       - name: "Run vimeo/psalm"
-        run: "vendor/bin/psalm --config=psalm.xml --diff --diff-methods --shepherd --show-info=false --stats --threads=4"
+        run: "vendor/bin/psalm --config=psalm.xml --diff --shepherd --show-info=false --stats --threads=4"
 
   tests:
     name: "Tests"
@@ -218,7 +199,6 @@ jobs:
     strategy:
       matrix:
         php-version:
-          - "7.2"
           - "7.3"
           - "7.4"
 
@@ -232,7 +212,7 @@ jobs:
         uses: "actions/checkout@v2.3.4"
 
       - name: "Install PHP with extensions"
-        uses: "shivammathur/setup-php@2.7.0"
+        uses: "shivammathur/setup-php@2.9.0"
         with:
           coverage: "none"
           extensions: "${{ env.PHP_EXTENSIONS }}"
@@ -242,27 +222,19 @@ jobs:
         run: "echo \"::add-matcher::${{ runner.tool_cache }}/phpunit.json\""
 
       - name: "Determine composer cache directory"
-        id: "determine-composer-cache-directory"
-        run: "echo \"::set-output name=directory::$(composer config cache-dir)\""
+        uses: "./.github/actions/composer/composer/determine-cache-directory"
 
       - name: "Cache dependencies installed with composer"
         uses: "actions/cache@v2.1.3"
         with:
-          path: "${{ steps.determine-composer-cache-directory.outputs.directory }}"
+          path: "${{ env.COMPOSER_CACHE_DIR }}"
           key: "php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('composer.lock') }}"
           restore-keys: "php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-"
 
-      - name: "Install lowest dependencies from composer.json"
-        if: "matrix.dependencies == 'lowest'"
-        run: "composer update --no-interaction --no-progress --no-suggest --prefer-lowest"
-
-      - name: "Install locked dependencies from composer.lock"
-        if: "matrix.dependencies == 'locked'"
-        run: "composer install --no-interaction --no-progress --no-suggest"
-
-      - name: "Install highest dependencies from composer.json"
-        if: "matrix.dependencies == 'highest'"
-        run: "composer update --no-interaction --no-progress --no-suggest"
+      - name: "Install ${{ matrix.dependencies }} dependencies with composer"
+        uses: "./.github/actions/composer/composer/install"
+        with:
+          dependencies: "${{ matrix.dependencies }}"
 
       - name: "Run auto-review tests with phpunit/phpunit"
         run: "vendor/bin/phpunit --configuration=test/AutoReview/phpunit.xml.dist"
@@ -291,7 +263,7 @@ jobs:
         uses: "actions/checkout@v2.3.4"
 
       - name: "Install PHP with extensions"
-        uses: "shivammathur/setup-php@2.7.0"
+        uses: "shivammathur/setup-php@2.9.0"
         with:
           coverage: "pcov"
           extensions: "${{ env.PHP_EXTENSIONS }}"
@@ -301,30 +273,22 @@ jobs:
         run: "echo \"::add-matcher::${{ runner.tool_cache }}/phpunit.json\""
 
       - name: "Determine composer cache directory"
-        id: "determine-composer-cache-directory"
-        run: "echo \"::set-output name=directory::$(composer config cache-dir)\""
+        uses: "./.github/actions/composer/composer/determine-cache-directory"
 
       - name: "Cache dependencies installed with composer"
         uses: "actions/cache@v2.1.3"
         with:
-          path: "${{ steps.determine-composer-cache-directory.outputs.directory }}"
+          path: "${{ env.COMPOSER_CACHE_DIR }}"
           key: "php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('composer.lock') }}"
           restore-keys: "php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-"
 
-      - name: "Install lowest dependencies from composer.json"
-        if: "matrix.dependencies == 'lowest'"
-        run: "composer update --no-interaction --no-progress --no-suggest --prefer-lowest"
-
-      - name: "Install locked dependencies from composer.lock"
-        if: "matrix.dependencies == 'locked'"
-        run: "composer install --no-interaction --no-progress --no-suggest"
-
-      - name: "Install highest dependencies from composer.json"
-        if: "matrix.dependencies == 'highest'"
-        run: "composer update --no-interaction --no-progress --no-suggest"
+      - name: "Install ${{ matrix.dependencies }} dependencies with composer"
+        uses: "./.github/actions/composer/composer/install"
+        with:
+          dependencies: "${{ matrix.dependencies }}"
 
       - name: "Collect code coverage with pcov and phpunit/phpunit"
-        run: "vendor/bin/phpunit --configuration=test/Unit/phpunit.xml.dist --coverage-clover=.build/logs/clover.xml"
+        run: "vendor/bin/phpunit --configuration=test/Unit/phpunit.xml.dist --coverage-clover=.build/phpunit/logs/clover.xml"
 
       - name: "Send code coverage report to Codecov.io"
         env:
@@ -349,34 +313,26 @@ jobs:
         uses: "actions/checkout@v2.3.4"
 
       - name: "Install PHP with extensions"
-        uses: "shivammathur/setup-php@2.7.0"
+        uses: "shivammathur/setup-php@2.9.0"
         with:
           coverage: "pcov"
           extensions: "${{ env.PHP_EXTENSIONS }}"
           php-version: "${{ matrix.php-version }}"
 
       - name: "Determine composer cache directory"
-        id: "determine-composer-cache-directory"
-        run: "echo \"::set-output name=directory::$(composer config cache-dir)\""
+        uses: "./.github/actions/composer/composer/determine-cache-directory"
 
       - name: "Cache dependencies installed with composer"
         uses: "actions/cache@v2.1.3"
         with:
-          path: "${{ steps.determine-composer-cache-directory.outputs.directory }}"
+          path: "${{ env.COMPOSER_CACHE_DIR }}"
           key: "php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('composer.lock') }}"
           restore-keys: "php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-"
 
-      - name: "Install lowest dependencies from composer.json"
-        if: "matrix.dependencies == 'lowest'"
-        run: "composer update --no-interaction --no-progress --no-suggest --prefer-lowest"
-
-      - name: "Install locked dependencies from composer.lock"
-        if: "matrix.dependencies == 'locked'"
-        run: "composer install --no-interaction --no-progress --no-suggest"
-
-      - name: "Install highest dependencies from composer.json"
-        if: "matrix.dependencies == 'highest'"
-        run: "composer update --no-interaction --no-progress --no-suggest"
+      - name: "Install ${{ matrix.dependencies }} dependencies with composer"
+        uses: "./.github/actions/composer/composer/install"
+        with:
+          dependencies: "${{ matrix.dependencies }}"
 
       - name: "Run mutation tests with pcov and infection/infection"
         run: "vendor/bin/infection --ignore-msi-with-no-mutations --min-covered-msi=${{ env.MIN_COVERED_MSI }} --min-msi=${{ env.MIN_MSI }}"
@@ -408,8 +364,8 @@ jobs:
       )
 
     steps:
-      - name: "Request review from @lctrs-bot"
-        uses: "actions/github-script@v2.0.0"
+      - name: "Request review from @${{ env.LCTRS_BOT_NAME }}"
+        uses: "actions/github-script@v3.1"
         with:
           github-token: "${{ secrets.LCTRS_BOT_TOKEN }}"
           script: |
@@ -417,38 +373,38 @@ jobs:
             const repository = context.repo
 
             const reviewers = [
-              "lctrs-bot",
+              "${{ env.LCTRS_BOT_NAME }}",
             ]
 
-            await github.pulls.createReviewRequest({
+            await github.pulls.requestReviewers({
                 owner: repository.owner,
                 pull_number: pullRequest.number,
                 repo: repository.repo,
                 reviewers: reviewers,
             })
 
-      - name: "Assign @lctrs-bot"
-        uses: "actions/github-script@v2.0.0"
+      - name: "Assign @${{ env.LCTRS_BOT_NAME }}"
+        uses: "actions/github-script@v3.1"
         with:
           github-token: "${{ secrets.LCTRS_BOT_TOKEN }}"
           script: |
             const pullRequest = context.payload.pull_request
             const repository = context.repo
 
-            const reviewers = [
-              "lctrs-bot",
+            const assignees = [
+              "${{ env.LCTRS_BOT_NAME }}",
             ]
 
             await github.issues.addAssignees({
-              assignees: reviewers,
+              assignees: assignees,
               issue_number: pullRequest.number,
               owner: repository.owner,
               repo: repository.repo,
             })
 
       - name: "Approve pull request"
-        uses: "actions/github-script@v2.0.0"
-        if: "github.actor != 'lctrs-bot'"
+        uses: "actions/github-script@v3.1"
+        if: "github.actor != '${{ env.LCTRS_BOT_NAME }}'"
         with:
           github-token: "${{ secrets.LCTRS_BOT_TOKEN }}"
           script: |
@@ -463,7 +419,7 @@ jobs:
             })
 
       - name: "Merge pull request"
-        uses: "actions/github-script@v2.0.0"
+        uses: "actions/github-script@v3.1"
         with:
           github-token: "${{ secrets.LCTRS_BOT_TOKEN }}"
           script: |

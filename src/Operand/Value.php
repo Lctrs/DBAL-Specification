@@ -4,20 +4,22 @@ declare(strict_types=1);
 
 namespace Lctrs\DBALSpecification\Operand;
 
+use Doctrine\DBAL\ParameterType;
 use Doctrine\DBAL\Query\QueryBuilder;
+use Doctrine\DBAL\Types\Type;
 
 final class Value implements Operand
 {
     /** @var mixed */
     private $value;
-    /** @var mixed */
+    /** @var int|string|Type|null */
     private $type;
 
     /**
-     * @param mixed $value
-     * @param mixed $type  One of Doctrine\DBAL\ParameterType::* or \Doctrine\DBAL\Types\Types::* constant
+     * @param mixed                $value
+     * @param int|string|Type|null $type
      */
-    public function __construct($value, $type = null)
+    public function __construct($value, $type = ParameterType::STRING)
     {
         $this->value = $value;
         $this->type  = $type;

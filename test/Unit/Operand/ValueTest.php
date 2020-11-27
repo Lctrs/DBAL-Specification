@@ -7,6 +7,7 @@ namespace Lctrs\DBALSpecification\Test\Unit\Operand;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\ParameterType;
 use Doctrine\DBAL\Query\QueryBuilder;
+use Doctrine\DBAL\Types\Type;
 use Doctrine\DBAL\Types\Types;
 use Lctrs\DBALSpecification\Operand\Value;
 use PHPUnit\Framework\TestCase;
@@ -22,7 +23,7 @@ final class ValueTest extends TestCase
     }
 
     /**
-     * @param mixed $type
+     * @param int|string|Type|null $type
      *
      * @dataProvider getTypes
      */
@@ -37,7 +38,7 @@ final class ValueTest extends TestCase
     }
 
     /**
-     * @return iterable<int, array<int, mixed>>
+     * @return iterable<int, array<int, int|string|Type|null>>
      */
     public function getTypes(): iterable
     {

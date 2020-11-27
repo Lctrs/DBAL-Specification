@@ -19,10 +19,7 @@ abstract class SpecificationRepository
         $this->connection = $connection;
     }
 
-    /**
-     * @param Filter|QueryModifier $specification
-     */
-    public function match($specification): ResultStatement
+    public function match(QueryModifier $specification): ResultStatement
     {
         $qb = $this->getQuery($specification);
 
@@ -37,10 +34,7 @@ abstract class SpecificationRepository
         );
     }
 
-    /**
-     * @param Filter|QueryModifier $specification
-     */
-    private function getQuery($specification): QueryBuilder
+    private function getQuery(QueryModifier $specification): QueryBuilder
     {
         $qb = $this->connection->createQueryBuilder();
         $this->applySpecification($qb, $specification);
@@ -48,16 +42,11 @@ abstract class SpecificationRepository
         return $qb;
     }
 
-    /**
-     * @param Filter|QueryModifier $specification
-     */
     private function applySpecification(
         QueryBuilder $queryBuilder,
-        $specification = null
+        QueryModifier $specification
     ): void {
-        if ($specification instanceof QueryModifier) {
-            $specification->modify($queryBuilder);
-        }
+        $specification->modify($queryBuilder);
 
         if (! $specification instanceof Filter) {
             return;
