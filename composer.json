@@ -47,5 +47,6 @@
   "support": {
     "issues": "https://github.com/Lctrs/DBAL-Specification/issues",
     "source": "https://github.com/Lctrs/DBAL-Specification"
-  }
+  },
+  "abandoned": true
 }
