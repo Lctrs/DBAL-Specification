@@ -13,6 +13,6 @@ final class AndX extends LogicX
      */
     protected function doGetFilters(ExpressionBuilder $expressionBuilder, array $filters): ?string
     {
-        return (string) $expressionBuilder->andX(...$filters);
+        return (string) $expressionBuilder->and(...$filters);
     }
 }
